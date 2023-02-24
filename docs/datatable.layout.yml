@@ -1,0 +1,85 @@
+type: layout
+title: Orders
+dataBinding:
+  type: object
+  properties:
+    page:
+      type: number
+      value: 1
+    pageSize:
+      type: number
+      value: 10
+    total:
+      type: number
+    orderBy:
+      type: string
+      value: 'name'
+    orderByType:
+      type: string
+      value: 'asc'
+    data:
+      type: array
+      properties:
+        name:
+          type: string
+  actions:
+    fetchData:
+      type: http
+      http:
+        method: GET
+        url: https://backend.sdui.io/api/v1/orders?page={{page}}&limit={{pageSize}}&orderBy={{orderBy}}&orderByType={{orderByType}}
+        headers:
+          Authorization: Bearer {{token}}
+        onResponse:
+          - type: set
+            set:
+              data: '{{response.items}}'
+              total: '{{response.totalItems}}'
+    deleteOrder:
+      type: http
+      http:
+        method: DELETE
+        url: https://backend.sdui.io/api/v1/orders/{{id}}
+        headers:
+          Authorization: Bearer {{token}}
+page:
+  - type: dataTable
+    dataTable:
+      dataSource: data
+      add:
+        action: navigate
+        navigate:
+          text: Add new order
+          url: /orders/add
+      delete:
+        prompt:
+          text: Are you sure you want to delete this order?
+        action: deleteOrder
+      open:
+        action: navigate
+        navigate:
+          text: View
+          url: /orders/{{id}}
+      pageSize:
+        sizes: [10, 20, 50]
+        currentSize: '{{pageSize}}'
+        action:
+          - type: set
+            set:
+              pageSize: '{{value}}'
+          - fetchData
+      columns:
+        - name: name
+          label: Name
+          sort:
+            enabled: true
+            action:
+              - type: set
+                set:
+                  orderBy: '{{value.columnName}}'
+                  orderByType: '{{value.isAscending ? "asc" : "desc"}}'
+              - type: fetchData
+          filter:
+            enabled: true
+            placeholder: Search by name
+            useClientFilter: true
