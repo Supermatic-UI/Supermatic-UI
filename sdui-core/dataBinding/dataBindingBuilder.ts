@@ -4,7 +4,7 @@ import { evaluateTemplate } from "./evaluateTemplate";
 
 export type DataContext = Record<string, any>;
 
-const dataBindingBuilder = (dataSchema: DataSchema, data: DataContext): DataBindingContainer => {
+export const dataBindingBuilder = (data: DataContext, dataSchema: DataSchema): DataBindingContainer => {
     return new ObjectContaier(data, dataSchema);
 }
 
@@ -48,7 +48,7 @@ export interface DataBindingContainer {
     evaluateTemplate(template: string): any;
 }
 
-class ObjectContaier implements DataBindingContainer {
+export class ObjectContaier implements DataBindingContainer {
 
     /**
      * 

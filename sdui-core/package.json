@@ -1,0 +1,27 @@
+{
+  "name": "sdui-core",
+  "version": "1.0.0",
+  "description": "Server driven UI library",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yamaoto/project-code-sdui.git"
+  },
+  "keywords": [
+    "no-code",
+    "low-code",
+    "server-driven-ui",
+    "vue"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yamaoto/project-code-sdui/issues"
+  },
+  "homepage": "https://github.com/yamaoto/project-code-sdui#readme"
+}
