@@ -40,16 +40,16 @@ cd sdui-vue
 yarn link
 ```
 
-3. Run Vue
-
-```BashSession
-cd sdui-vue
-yarn dev
-```
-
 Command should output something like this:
 
 ```
 success Registered "sdui-vue".
 info You can now run `yarn link "sdui-vue"` in the projects where you want to use this package and it will be used instead.
+```
+
+3. Run Vue
+
+```BashSession
+cd sdui-vue
+yarn dev
 ```
