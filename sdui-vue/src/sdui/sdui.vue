@@ -25,7 +25,7 @@ if (configuration?.dataBinding.type === 'array') {
 }
 
 const dataBinding: DataBindingContainer = dataBindingBuilder(configuration?.dataBinding, dataContext);
-const dataBinding: DataBindingContainer = new ObjectContaier(configuration?.dataBinding, dataContext);
+// const dataBinding: DataBindingContainer = new ObjectContaier(configuration?.dataBinding, dataContext);
 
 
 const components = {
