@@ -34,8 +34,8 @@ export function evaluateTemplate(template: string, dataContext: DataContext): st
         // Evaluate the expression using the given data context and append the result to the result string.
         const expression = template.slice(expressionStartIndex + 2, expressionEndIndex).trim();
         const value = evaluate(expression, dataContext);
-        result.append(value !== null ? value.toString() : '');
+        result.append(value !== null && value !== undefined && typeof value !== 'string' ? value.toString() : '');
         startIndex = expressionEndIndex + 2;
     }
-    return result.toString();
+    return typeof result !== 'string' ? result.toString() : null;
 }
