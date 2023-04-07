@@ -5,11 +5,10 @@ const { metadata, dataBinding } =  defineProps<{ metadata: LabelMetadata, dataBi
 
 console.log('[sdui-label] metadata.label.text', metadata.label.text);
 const text = dataBinding.evaluateTemplate(metadata.label.text);
-console.log('[sdui-text]', text);
+console.log('[sdui-label] text', text);
 </script>
 
 <template>
-    <h2>This is a label with </h2>
     <span>{{ text }}</span>
 </template>
 
