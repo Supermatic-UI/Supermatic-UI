@@ -11,6 +11,7 @@ import { evaluate } from "./evaluate";
  * @returns The result of evaluating the template string.
  */
 export function evaluateTemplate(template: string, dataContext: DataContext): string {
+    console.log('[dataBinding-evaluateTemplate] evaluateTemplate: ', template, dataContext);
     // Use a StringBuilder to avoid creating a new string for each concatenation.
     const result = new StringBuilder();
     let startIndex = 0;
@@ -18,24 +19,29 @@ export function evaluateTemplate(template: string, dataContext: DataContext): st
         // Search for the next expression start tag "{{".
         const expressionStartIndex = template.indexOf('{{', startIndex);
         if (expressionStartIndex === -1) {
+            console.log('[dataBinding-evaluateTemplate] expressionStartIndex === -1');
             result.append(template.slice(startIndex));
             break;
         }
+        console.log('[dataBinding-evaluateTemplate] expressionStartIndex: ', expressionStartIndex);
         // Search for the expression end tag "}}".
         const expressionEndIndex = template.indexOf('}}', expressionStartIndex);
 
         // If there are no more expression end tags, append the remaining part of the template string to the result and exit the loop.
         if (expressionEndIndex === -1) {
+            console.log('[dataBinding-evaluateTemplate] expressionEndIndex === -1');
             result.append(template.slice(startIndex));
             break;
         }
+        console.log('[dataBinding-evaluateTemplate] expressionEndIndex: ', expressionEndIndex);
         result.append(template.slice(startIndex, expressionStartIndex));
 
         // Evaluate the expression using the given data context and append the result to the result string.
         const expression = template.slice(expressionStartIndex + 2, expressionEndIndex).trim();
+        console.log('[dataBinding-evaluateTemplate] expression: ', expression);
         const value = evaluate(expression, dataContext);
-        result.append(value !== null && value !== undefined && typeof value !== 'string' ? value.toString() : '');
+        result.append(value != null ? value.toString() : '');
         startIndex = expressionEndIndex + 2;
     }
-    return typeof result !== 'string' ? result.toString() : null;
+    return result.toString();
 }
