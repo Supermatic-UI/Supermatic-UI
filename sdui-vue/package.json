@@ -24,8 +24,8 @@
     "vue"
   ],
   "dependencies": {
-    "vue": "^3.2.47",
-    "sdui-core": "../sdui-core"
+    "sdui-core": "link:../sdui-core",
+    "vue": "^3.2.47"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
