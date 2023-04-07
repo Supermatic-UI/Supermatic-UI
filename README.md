@@ -29,22 +29,7 @@ npm install -g yarn
 
 ```BashSession
 cd sdui-vue
-yarn
-```
-
-2. Link local packages
-
-
-```BashSession
-cd sdui-vue
-yarn link
-```
-
-Command should output something like this:
-
-```
-success Registered "sdui-vue".
-info You can now run `yarn link "sdui-vue"` in the projects where you want to use this package and it will be used instead.
+yarn install
 ```
 
 3. Run Vue
