@@ -1,11 +1,13 @@
-import { DataSchema } from "../specs/bindings";
+import { ActionRegistry } from "../registrations";
+import { ActionBinding, ActionMetadata } from "../specs/actions";
+import { SchemaDefinition } from "../specs/bindings";
 import { evaluate } from "./evaluate";
 import { evaluateTemplate } from "./evaluateTemplate";
 
 export type DataContext = Record<string, any>;
 
-export const dataBindingBuilder = (data: DataContext, dataSchema: DataSchema): DataBindingContainer => {
-    return new ObjectContaier(data, dataSchema);
+export const dataBindingBuilder = (data: DataContext, dataSchema: SchemaDefinition, actionRegistry: ActionRegistry): DataBindingContainer => {
+    return new ObjectContaier(data, dataSchema, actionRegistry);
 }
 
 
@@ -38,6 +40,8 @@ export interface DataBindingContainer {
      */
     evaluate(expression: string): any;
 
+    reactiveEvaluate(expression: string): any;
+
     /**
      * Evaluates a template string containing expressions enclosed in double curly braces,
      * and replaces each expression with the corresponding value from the data object.
@@ -46,9 +50,19 @@ export interface DataBindingContainer {
      * @returns The result of evaluating the template string.
      */
     evaluateTemplate(template: string): string;
+
+
+    handleAction(actionBinding: ActionBinding | ActionBinding[]): void;
 }
 
 export class ObjectContaier implements DataBindingContainer {
+
+    private keys: Record<string, {
+        proxy: any,
+        stats: {
+            
+        }
+    }> = {};
 
     /**
      * 
@@ -57,7 +71,8 @@ export class ObjectContaier implements DataBindingContainer {
      */
     constructor(
         private data: DataContext,
-        private dataSchema: DataSchema
+        private dataSchema: SchemaDefinition,
+        private actionRegistry: ActionRegistry
     ) {
 
     }
@@ -95,6 +110,10 @@ export class ObjectContaier implements DataBindingContainer {
         return evaluate(expression, this.data);
     }
 
+    reactiveEvaluate(expression: string): any {
+        // we need to wrap value into proxy to make it reactive
+    }
+
     /**
      * Evaluates a template string containing expressions enclosed in double curly braces,
      * and replaces each expression with the corresponding value from the data object.
@@ -105,6 +124,39 @@ export class ObjectContaier implements DataBindingContainer {
     evaluateTemplate(template: string): string {
         return evaluateTemplate(template, this.data);
     }
+
+    handleAction(actionBinding: ActionBinding | ActionBinding[]): void {
+        if (Array.isArray(actionBinding)) {
+            actionBinding.forEach(action => this.handleActionInternal(action));
+        } else {
+            this.handleActionInternal(actionBinding)
+        }
+    }
+
+    handleActionInternal(actionBinding: ActionBinding): void {
+        if (typeof actionBinding === 'string') {
+            // action reference with name
+            console.log('[data-binding] action call by reference')
+            if (this.dataSchema.actions[actionBinding] != null) {
+                this.handleActionInternalByDefinition(this.dataSchema.actions[actionBinding]);
+            }
+        } else {
+            // action definition
+            console.log('[data-binding] action call by definition')
+            this.handleActionInternalByDefinition(actionBinding);
+        }
+    }
+
+    handleActionInternalByDefinition(action: ActionMetadata) {
+        const handler = this.actionRegistry.getActionHandler(action.type);
+        if (handler != null) {
+            console.log(`[data-binding] action call type ${action.type}`);
+            handler(action, this.data, this);
+        } else {
+            console.warn(`[data-binding] no action handler registered for action type ${action.type}`);
+        }
+    }
+
 }
 
 

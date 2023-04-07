@@ -2,7 +2,10 @@ import { ActionHandler } from "./specs/actions";
 
 export class ActionRegistry {
 
-    private actions: { [type: string]: ActionHandler } = {};
+    constructor(
+        private actions: Record<string, ActionHandler> = {}
+    ) {
+    }
 
     registerActionHandler(type: string, handler: ActionHandler) {
         this.actions[type] = handler;

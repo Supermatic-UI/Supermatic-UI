@@ -24,6 +24,10 @@
           "url": "https://backend.sdui.io/api/v1/registration",
           "body": "{\n  \"name\": \"{{name}}\",\n  \"isAgreeTerms\": \"{{isAgreeTerms}}\"\n}\n"
         }
+      },
+      "sayHello": {
+        "type": "alert",
+        "value": "{{name}}, Hi!"
       }
     }
   },
@@ -31,88 +35,28 @@
     {
       "type": "label",
       "label": {
-        "text": "{{name}} Hi there! Please fill out the form below."
+        "text": "Welcome here! Please fill out the form below"
       },
       "size": 12,
       "row": 0,
       "cell": 0
     },
     {
-      "type": "gridLayout",
-      "gridLayout": {
-        "gridSettings": {
-          "columns": 12,
-          "rowClassName": "sdui-row",
-          "cellClassName": "sdui-cell"
-        },
-        "layout": [
-          {
-            "type": "label",
-            "label": {
-              "text": "{{name}} Hi there! Please fill out the form below."
-            },
-            "size": 12,
-            "row": 0,
-            "cell": 0
-          },
-          {
-            "type": "textInput",
-            "binding": "name",
-            "textInput": {
-              "label": "Name",
-              "placeholder": "Enter your name"
-            },
-            "size": 4,
-            "row": 1,
-            "cell": 0
-          },
-          {
-            "type": "checkbox",
-            "binding": "isAgreeTerms",
-            "bindnih": {
-              "[object Object]": null
-            },
-            "checkbox": {
-              "label": "I agree to the terms and conditions"
-            },
-            "size": 12,
-            "row": 2,
-            "cell": 0
-          },
-          {
-            "type": "link",
-            "link": {
-              "text": "Terms and conditions",
-              "url": "https://www.google.com"
-            },
-            "size": 12,
-            "row": 3,
-            "cell": 0
-          },
-          {
-            "type": "button",
-            "button": {
-              "text": "Submit",
-              "action": "formSubmit"
-            },
-            "enabled": {
-              "[object Object]": null
-            },
-            "size": 2,
-            "row": 4,
-            "cell": 0
-          },
-          {
-            "type": "button",
-            "button": {
-              "text": "Reset",
-              "action": "formReset"
-            },
-            "size": 2,
-            "row": 4,
-            "cell": 4
-          }
-        ]
+      "type": "textInput",
+      "binding": "name",
+      "textInput": {
+        "label": "Name",
+        "placeholder": "Enter your name"
+      },
+      "size": 4,
+      "row": 1,
+      "cell": 0
+    },
+    {
+      "type": "button",
+      "button": {
+        "text": "Say Hello",
+        "action": "sayHello"
       }
     }
   ]

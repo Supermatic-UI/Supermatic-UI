@@ -1,11 +1,10 @@
 <script setup>
-import sdui from'./sdui/sdui.vue';
-import schema from './example.json';
+import SduiPage from './sdui/sdui-page.vue'
+import schema from './example.json'
 </script>
 
 <template>
-  <sdui :configuration="schema"></sdui>
+  <SduiPage :configuration="schema"></SduiPage>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
