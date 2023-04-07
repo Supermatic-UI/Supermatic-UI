@@ -45,7 +45,7 @@ export interface DataBindingContainer {
      * @param template The template string to evaluate.
      * @returns The result of evaluating the template string.
      */
-    evaluateTemplate(template: string): any;
+    evaluateTemplate(template: string): string;
 }
 
 export class ObjectContaier implements DataBindingContainer {
@@ -102,7 +102,7 @@ export class ObjectContaier implements DataBindingContainer {
      * @param template The template string to evaluate.
      * @returns The result of evaluating the template string.
      */
-    evaluateTemplate(template: string): any {
+    evaluateTemplate(template: string): string {
         return evaluateTemplate(template, this.data);
     }
 }
