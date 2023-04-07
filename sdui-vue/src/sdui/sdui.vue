@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { PageMetadata } from "sdui-core/page"
-import { ObjectContaier, dataBindingBuilder, DataBindingContainer } from "sdui-core/dataBinding/dataBindingBuilder"
+import { dataBindingBuilder, DataBindingContainer } from "sdui-core/dataBinding/dataBindingBuilder"
 import VueLabel from "../components/sdui-label.vue"
 
 const { 
@@ -10,9 +10,9 @@ const {
 }>()
 
 if (configuration && configuration.type === 'layout') {
-    console.log('configuration', configuration)
+    console.log('[sdui-component] configuration', configuration)
 } else {
-    console.log('no configuration')
+    console.log('[sdui-component] no configuration')
 }
 
 let dataContext;
@@ -25,8 +25,9 @@ if (configuration?.dataBinding.type === 'array') {
 }
 
 const dataBinding: DataBindingContainer = dataBindingBuilder(configuration?.dataBinding, dataContext);
-// const dataBinding: DataBindingContainer = new ObjectContaier(configuration?.dataBinding, dataContext);
 
+// Test data
+dataBinding.setProperty('name', 'John Doe');
 
 const components = {
     label: VueLabel

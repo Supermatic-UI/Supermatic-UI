@@ -3,7 +3,9 @@ import { DataBindingContainer } from "sdui-core/dataBinding/dataBindingBuilder"
 import { LabelMetadata } from 'sdui-core/general-components/label/labelMetadata';
 const { metadata, dataBinding } =  defineProps<{ metadata: LabelMetadata, dataBinding: DataBindingContainer}>();
 
+console.log('[sdui-label] metadata.label.text', metadata.label.text);
 const text = dataBinding.evaluateTemplate(metadata.label.text);
+console.log('[sdui-text]', text);
 </script>
 
 <template>
