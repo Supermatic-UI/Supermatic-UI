@@ -1,25 +1,23 @@
 <script setup lang="ts">
-import { DataBindingContainer } from 'sdui-core/dataBinding/dataBindingBuilder'
+import { Ref, ref } from 'vue'
+import { DataBindingContainer } from 'sdui-core/dataBinding/DataBindingContainer'
 import { TextInputMetadata } from 'sdui-core/general-components/textInput/textInputMetadata'
+import { setupTemplate, setupBind } from '../sdui/setup'
+
 const props = defineProps<{ metadata: TextInputMetadata; dataBinding: DataBindingContainer }>()
 
-console.log('[sdui-text-input] metadata.text-input.label', props.metadata.textInput.label)
-const label = props.dataBinding.evaluateTemplate(props.metadata.textInput.label)
-console.log('[sdui-text-input] label', label)
+let labelRef = ref('')
+let modelRef = ref('')
 
-let bindValue;
+setupTemplate(props.dataBinding, props.metadata, props.metadata.textInput.label, labelRef)
+const inputBind = setupBind(props.dataBinding, props.metadata, modelRef)
 
-if (props.metadata.binding != null) {
-  const bindingProperty = props.dataBinding.evaluateTemplate(props.metadata.binding)
-  console.log('[sdui-text-input] bindingProperty', bindingProperty)
-  bindValue = props.dataBinding.evaluate(bindingProperty);
-  console.log('[sdui-text-input] bindValue', bindValue)
-}
+const updateInputValue = (e: Event) => inputBind.set((e.target as HTMLInputElement).value)
 </script>
 
 <template>
-  <span>{{ label }}</span>
-  <input type="text" v-model="bindValue"/>
+  <span>{{ labelRef }}</span>
+  <input type="text" :value="modelRef" @input="updateInputValue($event)" />
 </template>
 
 <style scoped></style>

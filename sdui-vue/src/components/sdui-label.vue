@@ -1,15 +1,18 @@
 <script setup lang="ts">
-import { DataBindingContainer } from 'sdui-core/dataBinding/dataBindingBuilder'
+import { ref } from 'vue'
+import { DataBindingContainer } from 'sdui-core/dataBinding/DataBindingContainer'
 import { LabelMetadata } from 'sdui-core/general-components/label/labelMetadata'
+import { setupTemplate } from '../sdui/setup'
+
 const props = defineProps<{ metadata: LabelMetadata; dataBinding: DataBindingContainer }>()
 
-console.log('[sdui-label] metadata.label.text', props.metadata.label.text)
-const text = props.dataBinding.evaluateTemplate(props.metadata.label.text)
-console.log('[sdui-label] text', text)
+let labelRef = ref('')
+
+setupTemplate(props.dataBinding, props.metadata, props.metadata.label.text, labelRef)
 </script>
 
 <template>
-  <span>{{ text }}</span>
+  <span>{{ labelRef }}</span>
 </template>
 
 <style scoped></style>

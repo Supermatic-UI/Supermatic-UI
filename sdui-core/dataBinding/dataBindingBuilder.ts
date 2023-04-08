@@ -1,162 +1,148 @@
-import { ActionRegistry } from "../registrations";
-import { ActionBinding, ActionMetadata } from "../specs/actions";
-import { SchemaDefinition } from "../specs/bindings";
-import { evaluate } from "./evaluate";
-import { evaluateTemplate } from "./evaluateTemplate";
+import { ActionRegistry } from '../registrations';
+import { ActionBinding, ActionMetadata } from '../specs/actions';
+import { SchemaDefinition } from '../specs/bindings';
+import { DataBindingContainer } from './DataBindingContainer';
+import { evaluate } from './evaluate';
+import { evaluateTemplate } from './evaluateTemplate';
+import { createBindingStore, BindingStore } from './bindingStore';
 
 export type DataContext = Record<string, any>;
 
-export const dataBindingBuilder = (data: DataContext, dataSchema: SchemaDefinition, actionRegistry: ActionRegistry): DataBindingContainer => {
-    return new ObjectContaier(data, dataSchema, actionRegistry);
-}
+type RendererReactivitySubscriptionHandler<T> = (value: T) => void;
 
+export const dataBindingBuilder = (
+  initial: DataContext,
+  dataSchema: SchemaDefinition,
+  actionRegistry: ActionRegistry
+): DataBindingContainer => {
+  const bindingStore: BindingStore = createBindingStore();
 
-export interface DataBindingContainer {
+  const mainProxy = bindingStore.createMainProxy(initial);
 
-    /**
-     * Sets the value of the specified property in the data object.
-     * Supports getting nested properties using dot notation (e.g. "objectProperty.insideProperty")
-     * and array properties using square brackets (e.g. "arrayProperty[0]").
-     * 
-     * @param name - The name of the property to set, can be a nested property using dot notation.
-     * @param value - The value to set for the property.
-     * 
-     * TODO: Implement support for setting nested properties using dot notation.
-     */
-    setProperty(name: string, value: any): void;
+  const handleActionInternal = (actionBinding: ActionBinding): void => {
+    if (typeof actionBinding === 'string') {
+      // action reference with name
+      console.log('[data-binding] action call by reference');
+      if (dataSchema.actions[actionBinding] != null) {
+        handleActionInternalByDefinition(dataSchema.actions[actionBinding]);
+      }
+    } else {
+      // action definition
+      console.log('[data-binding] action call by definition');
+      handleActionInternalByDefinition(actionBinding);
+    }
+  };
 
-    /**
-     * Set entire data object.
-     * 
-     * @param data - The data object to set.
-     */
-    setData(data: DataContext): void;
+  const handleActionInternalByDefinition = (action: ActionMetadata) => {
+    const handler = actionRegistry.getActionHandler(action.type);
+    if (handler != null) {
+      console.log(`[data-binding] action call type ${action.type}`);
+      handler(action, mainProxy, dataBinding);
+    } else {
+      console.warn(
+        `[data-binding] no action handler registered for action type ${action.type}`
+      );
+    }
+  };
 
-    /**
-     * Gets the value of the specified property in the data object. Supports getting
-     * nested properties using dot notation (e.g. "objectProperty.insideProperty").
-     * 
-     * @param name - The name of the property to get, can be a nested property using dot notation.
-     */
-    evaluate(expression: string): any;
-
-    reactiveEvaluate(expression: string): any;
-
-    /**
-     * Evaluates a template string containing expressions enclosed in double curly braces,
-     * and replaces each expression with the corresponding value from the data object.
-     *
-     * @param template The template string to evaluate.
-     * @returns The result of evaluating the template string.
-     */
-    evaluateTemplate(template: string): string;
-
-
-    handleAction(actionBinding: ActionBinding | ActionBinding[]): void;
-}
-
-export class ObjectContaier implements DataBindingContainer {
-
-    private keys: Record<string, {
-        proxy: any,
-        stats: {
-            
+  const dataBinding = {
+    setProperty: (name: string, value: any) => {
+      mainProxy[name] = value;
+    },
+    setData: (data: DataContext) => {
+      // TODO: Omplement proxy replacement
+    },
+    evaluate: (expression: string) => {
+      const evaluateResult = evaluate(expression, mainProxy);
+      return evaluateResult.value;
+    },
+    evaluateReactive: (expression: string) => {
+      const evaluateResult = evaluate(expression, mainProxy);
+      const subscriptions: RendererReactivitySubscriptionHandler<any>[] = [];
+      // Use wrapper object to pass reference and reactively update value
+      const wrapper = {
+        value: evaluateResult.value,
+        subscribe: (callback: (value: any) => void) => {
+          console.log(
+            `[data-binding] renderer subscribe changes for expression ${expression}`
+          );
+          subscriptions.push(callback);
+        },
+        updateValue: (value: any) => {
+          console.log(
+            `[data-binding] renderer update expression ${expression} value to ${value}`
+          );
+          evaluateResult.setter(value);
         }
-    }> = {};
+      };
+      // Subscribe for dependencies changes
+      bindingStore.subscribe(expression, () => {
+        console.log(
+          `[data-binding] detected depndence ${expression} changed. Updating expression ${expression}`
+        );
+        const innerEvaluateResult = evaluate(expression, mainProxy);
+        wrapper.value = innerEvaluateResult.value;
+        console.log(`[data-binding] expression new value ${wrapper.value}`);
+        console.log(
+          `[data-binding] notify subscribers of ${subscriptions.length}`
+        );
+        subscriptions.forEach((subscription) => {
+          console.log(
+            `[data-binding] renderer update expression ${expression}`
+          );
+          subscription(wrapper.value);
+        });
+      });
+      return wrapper;
+    },
+    evaluateTemplate: (template: string) => {
+      return evaluateTemplate(template, mainProxy);
+    },
+    evaluateTemplateReactive: (template: string) => {
+      // Evaluate template with collecting dependencies
+      const dependencies: string[] = [];
+      const result = evaluateTemplate(template, mainProxy, dependencies);
+      const subscriptions: RendererReactivitySubscriptionHandler<string>[] = [];
 
-    /**
-     * 
-     * @param data - The data object to set.
-     * @param dataSchema - The schema for the data object.
-     */
-    constructor(
-        private data: DataContext,
-        private dataSchema: SchemaDefinition,
-        private actionRegistry: ActionRegistry
-    ) {
-
-    }
-
-    /**
-     * Sets the value of the specified property in the data object.
-     * Supports getting nested properties using dot notation (e.g. "objectProperty.insideProperty")
-     * and array properties using square brackets (e.g. "arrayProperty[0]").
-     * 
-     * @param name - The name of the property to set, can be a nested property using dot notation.
-     * @param value - The value to set for the property.
-     * 
-     * TODO: Implement support for setting nested properties using dot notation.
-     */
-    setProperty(name: string, value: any) {
-        this.data[name] = value;
-    }
-
-    /**
-     * Set entire data object.
-     * 
-     * @param data - The data object to set.
-     */
-    setData(data: DataContext) {
-        this.data = data;
-    }
-
-    /**
-     * Gets the value of the specified property in the data object. Supports getting
-     * nested properties using dot notation (e.g. "objectProperty.insideProperty").
-     * 
-     * @param name - The name of the property to get, can be a nested property using dot notation.
-     */
-    evaluate(expression: string): any {
-        return evaluate(expression, this.data);
-    }
-
-    reactiveEvaluate(expression: string): any {
-        // we need to wrap value into proxy to make it reactive
-    }
-
-    /**
-     * Evaluates a template string containing expressions enclosed in double curly braces,
-     * and replaces each expression with the corresponding value from the data object.
-     *
-     * @param template The template string to evaluate.
-     * @returns The result of evaluating the template string.
-     */
-    evaluateTemplate(template: string): string {
-        return evaluateTemplate(template, this.data);
-    }
-
-    handleAction(actionBinding: ActionBinding | ActionBinding[]): void {
-        if (Array.isArray(actionBinding)) {
-            actionBinding.forEach(action => this.handleActionInternal(action));
-        } else {
-            this.handleActionInternal(actionBinding)
+      // Use wrapper object to pass reference and reactively update value
+      const wrapper = {
+        value: result,
+        subscribe: (callback: (value: string) => void) => {
+          console.log(
+            `[data-binding] renderer subscribe changes for template ${template}`
+          );
+          subscriptions.push(callback);
         }
+      };
+      // Subscribe for dependencies changes
+      dependencies.forEach((dependency) => {
+        console.log(
+          `[data-binding] subscribe to ${dependency} changes for template ${template}`
+        );
+        bindingStore.subscribe(dependency, () => {
+          console.log(
+            `[data-binding] detected depndence ${dependency} changed. Updating template ${template}`
+          );
+          wrapper.value = evaluateTemplate(template, mainProxy);
+          console.log(`[data-binding] template new value ${wrapper.value}`);
+          console.log(
+            `[data-binding] notify subscribers of ${subscriptions.length}`
+          );
+          subscriptions.forEach((subscription) => {
+            console.log(`[data-binding] renderer update template ${template}`);
+            subscription(wrapper.value);
+          });
+        });
+      });
+      return wrapper;
+    },
+    handleAction: (actionBinding: ActionBinding | ActionBinding[]) => {
+      if (Array.isArray(actionBinding)) {
+        actionBinding.forEach((action) => handleActionInternal(action));
+      } else {
+        handleActionInternal(actionBinding);
+      }
     }
-
-    handleActionInternal(actionBinding: ActionBinding): void {
-        if (typeof actionBinding === 'string') {
-            // action reference with name
-            console.log('[data-binding] action call by reference')
-            if (this.dataSchema.actions[actionBinding] != null) {
-                this.handleActionInternalByDefinition(this.dataSchema.actions[actionBinding]);
-            }
-        } else {
-            // action definition
-            console.log('[data-binding] action call by definition')
-            this.handleActionInternalByDefinition(actionBinding);
-        }
-    }
-
-    handleActionInternalByDefinition(action: ActionMetadata) {
-        const handler = this.actionRegistry.getActionHandler(action.type);
-        if (handler != null) {
-            console.log(`[data-binding] action call type ${action.type}`);
-            handler(action, this.data, this);
-        } else {
-            console.warn(`[data-binding] no action handler registered for action type ${action.type}`);
-        }
-    }
-
-}
-
-
+  };
+  return dataBinding;
+};

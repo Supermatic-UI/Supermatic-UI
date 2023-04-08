@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { DataBindingContainer } from 'sdui-core/dataBinding/dataBindingBuilder'
+import { DataBindingContainer } from 'sdui-core/dataBinding/DataBindingContainer'
 import { ButtonkMetadata } from 'sdui-core/general-components/button/buttonMetadata'
+import { ref } from 'vue'
+import { setupTemplate } from '../sdui/setup'
+
 const props = defineProps<{ metadata: ButtonkMetadata; dataBinding: DataBindingContainer }>()
 
-console.log('[sdui-button] metadata.button.text', props.metadata.button.text)
-const text = props.dataBinding.evaluateTemplate(props.metadata.button.text)
-console.log('[sdui-button] text', text)
+let labelRef = ref('')
+
+setupTemplate(props.dataBinding, props.metadata, props.metadata.button.text, labelRef)
 
 const click = () => {
   console.log('[sdui-button] click')
@@ -17,7 +20,7 @@ const click = () => {
 </script>
 
 <template>
-  <button @click="click()">{{ text }}</button>
+  <button @click="click()">{{ labelRef }}</button>
 </template>
 
 <style scoped></style>

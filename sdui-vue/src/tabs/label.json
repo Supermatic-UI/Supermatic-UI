@@ -1,0 +1,36 @@
+{
+  "type": "layout",
+  "title": "Registration form",
+  "dataBinding": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "value": ""
+      }
+    },
+    "actions": {}
+  },
+  "page": [
+    {
+      "type": "label",
+      "label": {
+        "text": "{{name}}, Welcome here! Please fill out the form below"
+      },
+      "size": 12,
+      "row": 0,
+      "cell": 0
+    },
+    {
+      "type": "textInput",
+      "binding": "name",
+      "textInput": {
+        "label": "Name",
+        "placeholder": "Enter your name"
+      },
+      "size": 4,
+      "row": 1,
+      "cell": 0
+    }
+  ]
+}

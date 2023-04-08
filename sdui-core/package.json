@@ -7,6 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write --config .prettierrc '**/*.ts' ."
   },
   "repository": {
     "type": "git",
@@ -23,5 +25,12 @@
   "bugs": {
     "url": "https://github.com/yamaoto/project-code-sdui/issues"
   },
-  "homepage": "https://github.com/yamaoto/project-code-sdui#readme"
+  "homepage": "https://github.com/yamaoto/project-code-sdui#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "eslint": "^8.38.0",
+    "prettier": "^2.8.7",
+    "typescript": "^5.0.4"
+  }
 }

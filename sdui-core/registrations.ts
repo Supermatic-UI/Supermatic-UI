@@ -1,30 +1,25 @@
-import { ActionHandler } from "./specs/actions";
+import { ActionHandler } from './specs/actions';
 
 export class ActionRegistry {
+  constructor(private actions: Record<string, ActionHandler> = {}) {}
 
-    constructor(
-        private actions: Record<string, ActionHandler> = {}
-    ) {
-    }
+  registerActionHandler(type: string, handler: ActionHandler) {
+    this.actions[type] = handler;
+  }
 
-    registerActionHandler(type: string, handler: ActionHandler) {
-        this.actions[type] = handler;
-    }
-    
-    getActionHandler(type: string): ActionHandler {
-        return this.actions[type];
-    }
+  getActionHandler(type: string): ActionHandler {
+    return this.actions[type];
+  }
 }
 
 export class ComponentRegistry {
+  private components: { [type: string]: any } = {};
 
-    private components: { [type: string]: any } = {};
+  registerComponent(type: string, component: any) {
+    this.components[type] = component;
+  }
 
-    registerComponent(type: string, component: any) {
-        this.components[type] = component;
-    }
-    
-    getComponent(type: string): any {
-        return this.components[type];
-    }
+  getComponent(type: string): any {
+    return this.components[type];
+  }
 }
