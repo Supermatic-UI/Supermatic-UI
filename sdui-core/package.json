@@ -1,0 +1,36 @@
+{
+  "name": "sdui-core",
+  "version": "1.0.1",
+  "description": "Server driven UI library",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write --config .prettierrc '**/*.ts' ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yamaoto/project-code-sdui.git"
+  },
+  "keywords": [
+    "no-code",
+    "low-code",
+    "server-driven-ui",
+    "vue"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yamaoto/project-code-sdui/issues"
+  },
+  "homepage": "https://github.com/yamaoto/project-code-sdui#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "eslint": "^8.38.0",
+    "prettier": "^2.8.7",
+    "typescript": "^5.0.4"
+  }
+}
