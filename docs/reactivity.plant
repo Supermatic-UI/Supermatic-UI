@@ -1,0 +1,74 @@
+@startuml
+
+participant renderer
+
+box sdui-core
+    participant core as "sdui-core"
+    participant binding as "binding module"
+    participant bindingStore as "bindingStore module"
+    participant proxy as "Proxy module"
+end box
+
+group Prepearing context bindings
+    note right of renderer
+        Create context
+    end note
+
+    renderer -> binding : call ""dataBindingBuilder"" and pass context data
+    binding -> binding : create new instanc \nof ""ObjectContaier""
+    binding -> binding : create **main** binding \nwith ""Proxy"" for context data
+    binding -> bindingStore : store binding with **main** proxy in ""bindingStore""
+
+    note right of renderer
+        Create context variables
+    end note
+
+    renderer -> binding : call ""setProperty"" for a variable
+    binding -> bindingStore : check ""bindingStore"" for existing bindings
+    note right of binding : case for not existing ""Proxy"" in ""bindingStore""
+    alt reference type variable
+        binding -> binding : create ""Proxy"" for variable
+        binding -> bindingStore : store binding with ""Proxy"" in ""bindingStore""
+    else value type variable
+        note right of binding : Nothing special to do
+    end
+
+end
+
+group Reactivity subscriptions
+
+    note right of renderer
+        Creating reactivity subscriptions
+    end note
+    renderer -> binding : call ""evaluateTemplateReactive""
+    binding -> bindingStore : check ""bindingStore"" for existing bindings
+    note right of binding : case for not existing ""bindingStore"" and binding
+    binding -> binding : evaluate template \nand determine dependencies
+    binding -> bindingStore : store binding with dependencies in ""bindingStore""
+    bindingStore -> bindingStore : subscribe for updates on dependencies
+    binding -> binding : create and store reactivity wrap
+    binding --> renderer : return reactivity wrap
+    renderer -> renderer : use reactivity wrap in component
+
+end
+
+.......
+
+
+group Change tracking
+    note right of renderer
+        Flow for change tracking in data used in template as a dependency
+    end note
+
+    renderer -> renderer : Make change in context data
+    renderer ->> proxy : proxy set method
+    proxy -> bindingStore: notify change event
+    bindingStore -> binding : notify change event
+    binding -> binding : call ""evaluateTemplate"" without reactivity
+    binding -> binding : update reactivity wrap with new text
+    binding ->> renderer:  pass update by reactivity wrap object
+    renderer -> renderer : catch update and update component
+end
+
+
+@enduml
