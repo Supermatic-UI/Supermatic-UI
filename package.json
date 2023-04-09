@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamaoto/project-code-sdui.git"
+    "url": "git+https://github.com/Suprematic-UI/sdui.git"
   },
   "keywords": [
     "no-code",
@@ -18,10 +18,10 @@
     "server-driven-ui",
     "vue"
   ],
-  "author": "",
+  "author": "Suprematic UI",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yamaoto/project-code-sdui/issues"
+    "url": "https://github.com/https://github.com/Suprematic-UI/sdui/issues"
   },
-  "homepage": "https://github.com/yamaoto/project-code-sdui#readme"
+  "homepage": "https://github.com/https://github.com/Suprematic-UI/sdui#readme"
 }
