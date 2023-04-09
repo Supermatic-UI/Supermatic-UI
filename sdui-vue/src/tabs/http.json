@@ -15,7 +15,7 @@
     {
       "type": "button",
       "button": {
-        "text": "Get random dog fact",
+        "text": "Get random cat fact",
         "action": {
           "type": "http",
           "method": "GET",
@@ -23,7 +23,7 @@
           "onResponse": {
             "type": "set",
             "set": {
-              "value": "{{response.data[0]}}"
+              "value": "Here's a random cat fact: {{response.data[0]}}"
             }
           }
         }
