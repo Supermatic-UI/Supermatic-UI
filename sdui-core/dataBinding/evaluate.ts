@@ -1,6 +1,6 @@
 import { DataContext } from './dataBindingBuilder';
 
-export type EvaluationResult<T> = {
+export type EvaluationResult<T = any> = {
   value: T;
   setter: (value: T) => void;
 };
@@ -11,13 +11,13 @@ const emptySetter = () => {};
  * Supports getting nested properties using dot notation (e.g. "objectProperty.insideProperty")
  * and array properties using square brackets (e.g. "arrayProperty[0]").
  * @param expression
- * @param dataContext
+ * @param context
  * @returns The result of evaluating the expression.
  */
 
-export const evaluate = (expression: string, dataContext: DataContext): EvaluationResult<any> => {
+export const evaluate = (expression: string, context: DataContext): EvaluationResult<any> => {
   const expressionParts = expression.split('.');
-  let value: any = dataContext;
+  let value: any = context;
   let parent: any;
   let accessor: any;
   for (const part of expressionParts) {
@@ -38,7 +38,9 @@ export const evaluate = (expression: string, dataContext: DataContext): Evaluati
       parent = value;
       accessor = part;
     }
+    console.log(`[evaluate] accessor: ${accessor}, parent:`, parent);
     value = parent?.[accessor];
+    console.log(`[evaluate] accessor: ${accessor}, value:`, value);
   }
   const setter = (value: any) => {
     if (parent != null) {

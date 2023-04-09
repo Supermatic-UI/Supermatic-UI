@@ -1,10 +1,10 @@
-import { DataBindingContainer } from '../dataBinding/DataBindingContainer';
+import { DataBindingContainer } from '../dataBinding/dataBindingBuilder';
 
 export type ActionMetadata = { type: string } & Record<string, any>;
 
-export type ActionHandler = (
-  action: ActionMetadata,
-  data: any,
+export type ActionHandler<Action = any, Data = any> = (
+  action: ActionMetadata & Action,
+  data: Data,
   context: DataBindingContainer
 ) => PromiseLike<void> | void;
 

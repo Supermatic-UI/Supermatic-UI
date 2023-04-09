@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Ref, ref } from "vue";
-import { DataBindingContainer } from "sdui-core/dataBinding/DataBindingContainer";
+import { DataBindingContainer } from "sdui-core/dataBinding/dataBindingBuilder";
 import { TextInputMetadata } from "sdui-core/general-components/textInput/textInputMetadata";
 import { setupTemplate, setupBind } from "../sdui/setup";
 

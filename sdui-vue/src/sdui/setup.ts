@@ -1,5 +1,5 @@
 import { Ref } from "vue";
-import { DataBindingContainer } from "sdui-core/dataBinding/DataBindingContainer";
+import { DataBindingContainer } from "sdui-core/dataBinding/dataBindingBuilder";
 import { ControlMetadata } from "sdui-core/specs/controls";
 import { BindingString } from "sdui-core/specs/bindings";
 

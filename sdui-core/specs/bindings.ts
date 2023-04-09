@@ -1,16 +1,15 @@
 import { ActionBinding, ActionMetadata } from './actions';
 
-export type PrimitiveType = 'string' | 'number' | 'boolean' | 'date' | 'any';
+export type PrimitiveType = 'string' | 'number' | 'boolean' | 'date';
 export type ReferenceSchema = { $ref: string };
 export type DataSchemaValue = {
   value?: string;
 };
 
-export type SchemaDefinition = {
-  type: 'object' | 'array';
-  properties: {
-    [name: string]: (DataSchema | { type: PrimitiveType } | ReferenceSchema) & DataSchemaValue;
-  };
+export type RefType = 'object' | 'array';
+export type SchemaDefinition<T extends RefType = RefType> = {
+  type: T;
+  properties: Record<string, (DataSchema | { type: PrimitiveType } | ReferenceSchema) & DataSchemaValue>;
   actions: Record<string, ActionMetadata>;
 };
 
