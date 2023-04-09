@@ -17,7 +17,7 @@ const tabs = [
 
   <div class="tab-container">
     <div class="labels">
-      <button v-for="(item, index) in tabs" :key="itindexem" @click="activeTab = index">{{ item.name }}</button>
+      <button v-for="(item, index) in tabs" :key="index" @click="activeTab = index">{{ item.name }}</button>
     </div>
     <div class="tab">
       <keep-alive>
