@@ -1,0 +1,40 @@
+{
+    "type": "layout",
+    "title": "Registration form",
+    "dataBinding": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "value": "Hit the button up there to get a random dog fact"
+        }
+      },
+      "actions": {}
+    },
+    "page": [
+      {
+        "type": "button",
+        "button": {
+          "text": "Get random cat fact",
+          "action": {
+            "type": "http",
+            "method": "GET",
+            "url": "https://meowfacts.herokuapp.com/",
+            "onResponse": {
+              "type": "set",
+              "set": {
+                "value": "Here's a random cat fact: {{response.data[0]}}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "label",
+        "label": {
+          "text": "{{value}}"
+        }
+      }
+    ]
+  }
+  
