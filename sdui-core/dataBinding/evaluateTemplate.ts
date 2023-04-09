@@ -6,11 +6,11 @@ import { evaluate } from './evaluate';
  * and replaces each expression with the corresponding value from the given data context.
  *
  * @param template The template string to evaluate.
- * @param dataContext The data context to use for evaluating the expressions.
+ * @param context The data context to use for evaluating the expressions.
  * @returns The result of evaluating the template string.
  */
-export const evaluateTemplate = (template: string, dataContext: DataContext, dependencies?: string[]): string => {
-  console.log('[dataBinding-evaluateTemplate] evaluateTemplate: ', template, dataContext);
+export const evaluateTemplate = (template: string, context: DataContext, dependencies?: string[]): string => {
+  console.log('[dataBinding-evaluateTemplate] evaluateTemplate: ', template, context);
   // Use a buffer to avoid creating a new string for each concatenation.
   const buffer: string[] = [];
   let startIndex = 0;
@@ -41,7 +41,7 @@ export const evaluateTemplate = (template: string, dataContext: DataContext, dep
       dependencies.push(expression);
     }
     console.log('[dataBinding-evaluateTemplate] expression: ', expression);
-    const evaluateResult = evaluate(expression, dataContext);
+    const evaluateResult = evaluate(expression, context);
     const value = evaluateResult.value;
 
     buffer.push(value != null ? value.toString() : '');

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DataBindingContainer } from "sdui-core/dataBinding/DataBindingContainer";
+import { DataBindingContainer } from "sdui-core/dataBinding/dataBindingBuilder";
 import { ButtonkMetadata } from "sdui-core/general-components/button/buttonMetadata";
 import { ref } from "vue";
 import { setupTemplate } from "../sdui/setup";

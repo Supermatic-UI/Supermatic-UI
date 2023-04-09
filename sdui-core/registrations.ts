@@ -10,7 +10,7 @@ export interface RegistrationApi {
 
 export const buildRegistrationApi = (
   initialComponents: Record<string, any>,
-  initialActions: Record<string, ActionHandler>
+  initialActions: Record<string, ActionHandler> = {}
 ): RegistrationApi => {
   const components = { ...initialComponents };
   const actions = { ...initialActions };

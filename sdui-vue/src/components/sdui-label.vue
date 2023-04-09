@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { DataBindingContainer } from "sdui-core/dataBinding/DataBindingContainer";
+import { DataBindingContainer } from "sdui-core/dataBinding/dataBindingBuilder";
 import { LabelMetadata } from "sdui-core/general-components/label/labelMetadata";
 import { setupTemplate } from "../sdui/setup";
 

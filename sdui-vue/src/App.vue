@@ -1,28 +1,30 @@
-<script setup>
+<script setup lang="ts">
 import Label from "./tabs/label.vue";
+import Http from "./tabs/http.vue";
+import { ref } from "vue";
 
-let activeTab;
+let activeTab = ref(0);
+console.log("activeTab", activeTab);
 
-const tabs = [{ name: "Label", component: Label }];
+const tabs = [
+  { name: "Label", component: Label },
+  { name: "HTTP", component: Http },
+];
 </script>
 
 <template>
   <h2>SDUI</h2>
 
-  <!-- <div class="tab-container">
+  <div class="tab-container">
     <div class="labels">
-      <button v-for="item in tabs" :key="item" @click="activeTab = item.component"> {{ item.name }}</button>
+      <button v-for="(item, index) in tabs" :key="itindexem" @click="activeTab = index">{{ item.name }}</button>
     </div>
     <div class="tab">
       <keep-alive>
-        <component :is="activeTab">
-      </component>
+        <component :is="tabs[activeTab].component"> </component>
       </keep-alive>
-      
     </div>
-  </div> -->
-
-  <Label></Label>
+  </div>
 </template>
 
 <style scoped></style>

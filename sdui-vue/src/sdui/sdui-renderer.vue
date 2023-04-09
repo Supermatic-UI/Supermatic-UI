@@ -3,7 +3,7 @@ import { PageMetadata } from "sdui-core/page";
 import { dataBindingBuilder } from "sdui-core/dataBinding/dataBindingBuilder";
 import { SchemaDefinition } from "sdui-core/specs/bindings";
 import { buildRegistrationApi, RegistrationApi } from "sdui-core/registrations";
-import { DataBindingContainer } from "sdui-core/dataBinding/DataBindingContainer";
+import { DataBindingContainer } from "sdui-core/dataBinding/dataBindingBuilder";
 
 const props = defineProps<{
   configuration?: PageMetadata;
