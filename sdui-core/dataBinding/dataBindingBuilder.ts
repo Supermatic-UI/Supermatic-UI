@@ -1,4 +1,4 @@
-import { ActionRegistry } from '../registrations';
+import { RegistrationApi } from '../registrations';
 import { ActionBinding, ActionMetadata } from '../specs/actions';
 import { SchemaDefinition } from '../specs/bindings';
 import { DataBindingContainer } from './DataBindingContainer';
@@ -13,7 +13,7 @@ type RendererReactivitySubscriptionHandler<T> = (value: T) => void;
 export const dataBindingBuilder = (
   initial: DataContext,
   dataSchema: SchemaDefinition,
-  actionRegistry: ActionRegistry
+  registrations: RegistrationApi
 ): DataBindingContainer => {
   const bindingStore: BindingStore = createBindingStore();
 
@@ -34,14 +34,12 @@ export const dataBindingBuilder = (
   };
 
   const handleActionInternalByDefinition = (action: ActionMetadata) => {
-    const handler = actionRegistry.getActionHandler(action.type);
+    const handler = registrations.getActionHandler(action.type);
     if (handler != null) {
       console.log(`[data-binding] action call type ${action.type}`);
       handler(action, mainProxy, dataBinding);
     } else {
-      console.warn(
-        `[data-binding] no action handler registered for action type ${action.type}`
-      );
+      console.warn(`[data-binding] no action handler registered for action type ${action.type}`);
     }
   };
 
@@ -63,33 +61,23 @@ export const dataBindingBuilder = (
       const wrapper = {
         value: evaluateResult.value,
         subscribe: (callback: (value: any) => void) => {
-          console.log(
-            `[data-binding] renderer subscribe changes for expression ${expression}`
-          );
+          console.log(`[data-binding] renderer subscribe changes for expression ${expression}`);
           subscriptions.push(callback);
         },
         updateValue: (value: any) => {
-          console.log(
-            `[data-binding] renderer update expression ${expression} value to ${value}`
-          );
+          console.log(`[data-binding] renderer update expression ${expression} value to ${value}`);
           evaluateResult.setter(value);
         }
       };
       // Subscribe for dependencies changes
       bindingStore.subscribe(expression, () => {
-        console.log(
-          `[data-binding] detected depndence ${expression} changed. Updating expression ${expression}`
-        );
+        console.log(`[data-binding] detected depndence ${expression} changed. Updating expression ${expression}`);
         const innerEvaluateResult = evaluate(expression, mainProxy);
         wrapper.value = innerEvaluateResult.value;
         console.log(`[data-binding] expression new value ${wrapper.value}`);
-        console.log(
-          `[data-binding] notify subscribers of ${subscriptions.length}`
-        );
+        console.log(`[data-binding] notify subscribers of ${subscriptions.length}`);
         subscriptions.forEach((subscription) => {
-          console.log(
-            `[data-binding] renderer update expression ${expression}`
-          );
+          console.log(`[data-binding] renderer update expression ${expression}`);
           subscription(wrapper.value);
         });
       });
@@ -108,26 +96,18 @@ export const dataBindingBuilder = (
       const wrapper = {
         value: result,
         subscribe: (callback: (value: string) => void) => {
-          console.log(
-            `[data-binding] renderer subscribe changes for template ${template}`
-          );
+          console.log(`[data-binding] renderer subscribe changes for template ${template}`);
           subscriptions.push(callback);
         }
       };
       // Subscribe for dependencies changes
       dependencies.forEach((dependency) => {
-        console.log(
-          `[data-binding] subscribe to ${dependency} changes for template ${template}`
-        );
+        console.log(`[data-binding] subscribe to ${dependency} changes for template ${template}`);
         bindingStore.subscribe(dependency, () => {
-          console.log(
-            `[data-binding] detected depndence ${dependency} changed. Updating template ${template}`
-          );
+          console.log(`[data-binding] detected depndence ${dependency} changed. Updating template ${template}`);
           wrapper.value = evaluateTemplate(template, mainProxy);
           console.log(`[data-binding] template new value ${wrapper.value}`);
-          console.log(
-            `[data-binding] notify subscribers of ${subscriptions.length}`
-          );
+          console.log(`[data-binding] notify subscribers of ${subscriptions.length}`);
           subscriptions.forEach((subscription) => {
             console.log(`[data-binding] renderer update template ${template}`);
             subscription(wrapper.value);

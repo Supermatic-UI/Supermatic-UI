@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { Ref, ref } from 'vue'
-import { DataBindingContainer } from 'sdui-core/dataBinding/DataBindingContainer'
-import { TextInputMetadata } from 'sdui-core/general-components/textInput/textInputMetadata'
-import { setupTemplate, setupBind } from '../sdui/setup'
+import { Ref, ref } from "vue";
+import { DataBindingContainer } from "sdui-core/dataBinding/DataBindingContainer";
+import { TextInputMetadata } from "sdui-core/general-components/textInput/textInputMetadata";
+import { setupTemplate, setupBind } from "../sdui/setup";
 
-const props = defineProps<{ metadata: TextInputMetadata; dataBinding: DataBindingContainer }>()
+const props = defineProps<{ metadata: TextInputMetadata; dataBinding: DataBindingContainer }>();
 
-let labelRef = ref('')
-let modelRef = ref('')
+let labelRef = ref("");
+let modelRef = ref("");
 
-setupTemplate(props.dataBinding, props.metadata, props.metadata.textInput.label, labelRef)
-const inputBind = setupBind(props.dataBinding, props.metadata, modelRef)
+setupTemplate(props.dataBinding, props.metadata, props.metadata.textInput.label, labelRef);
+const inputBind = setupBind(props.dataBinding, props.metadata, modelRef);
 
-const updateInputValue = (e: Event) => inputBind.set((e.target as HTMLInputElement).value)
+const updateInputValue = (e: Event) => inputBind.set((e.target as HTMLInputElement).value);
 </script>
 
 <template>

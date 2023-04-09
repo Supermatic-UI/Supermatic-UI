@@ -29,9 +29,7 @@ export interface DataBindingContainer {
    */
   evaluate(expression: string): any;
 
-  evaluateReactive(
-    expression: string
-  ): ReactivityContainer<any> & { updateValue: (value: any | null) => void };
+  evaluateReactive(expression: string): ReactivityContainer<any> & { updateValue: (value: any | null) => void };
 
   /**
    * Evaluates a template string containing expressions enclosed in double curly braces,

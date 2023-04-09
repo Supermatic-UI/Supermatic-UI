@@ -9,8 +9,7 @@ export type DataSchemaValue = {
 export type SchemaDefinition = {
   type: 'object' | 'array';
   properties: {
-    [name: string]: (DataSchema | { type: PrimitiveType } | ReferenceSchema) &
-      DataSchemaValue;
+    [name: string]: (DataSchema | { type: PrimitiveType } | ReferenceSchema) & DataSchemaValue;
   };
   actions: Record<string, ActionMetadata>;
 };
