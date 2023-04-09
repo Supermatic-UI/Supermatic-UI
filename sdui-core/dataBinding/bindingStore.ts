@@ -5,8 +5,7 @@ export type BindingStore = {
   subscribe: (path: string, callback: SubscriptionHandler) => void;
 };
 
-const combinePath = (path: string, key: string): string =>
-  path === '' ? key : `${path}.${key}`;
+const combinePath = (path: string, key: string): string => (path === '' ? key : `${path}.${key}`);
 
 export const createBindingStore = (): BindingStore => {
   let mainProxy: any;
@@ -15,20 +14,14 @@ export const createBindingStore = (): BindingStore => {
 
   const proxyFabric = (object: any, path: string): any => {
     const proxy = new Proxy(object, {
-      set: (target, key, newValue) =>
-        handleProxySet(path, target, String(key), newValue)
+      set: (target, key, newValue) => handleProxySet(path, target, String(key), newValue)
     });
     console.log(`[bind-store] create proxy for '${path}'`);
 
     return proxy;
   };
 
-  const createChildProxy = (
-    path: string,
-    target: any,
-    key: string,
-    newValue: any
-  ): void => {
+  const createChildProxy = (path: string, target: any, key: string, newValue: any): void => {
     const combinedPath = combinePath(path, key);
     console.log(`[bind-store] create child proxy for ${combinedPath}`);
     const childProxy = proxyFabric(newValue, combinedPath);
@@ -43,12 +36,7 @@ export const createBindingStore = (): BindingStore => {
     target[key] = childProxy;
   };
 
-  const handleProxySet = (
-    path: string,
-    target: any,
-    key: string,
-    newValue: any
-  ): boolean => {
+  const handleProxySet = (path: string, target: any, key: string, newValue: any): boolean => {
     // Handle set
     const combinedPath = combinePath(path, key);
     console.log(`[bind-store] handle proxy set for '${combinedPath}'`);
@@ -75,9 +63,7 @@ export const createBindingStore = (): BindingStore => {
         const subscriber = subscribers[i];
         try {
           // notify change
-          console.log(
-            `[bind-store] notify change event with ${path}. Call subscriber #${i}`
-          );
+          console.log(`[bind-store] notify change event with ${path}. Call subscriber #${i}`);
           subscriber();
         } catch (error) {
           console.error(error);
@@ -109,9 +95,7 @@ export const createBindingStore = (): BindingStore => {
     },
     subscribe: (path, callback) => {
       const subscriptionPath = findSubscriptionPath(path);
-      console.log(
-        `[bind-store] subscribe to change event with ${subscriptionPath} (original path: ${path})`
-      );
+      console.log(`[bind-store] subscribe to change event with ${subscriptionPath} (original path: ${path})`);
       if (!subscriptions[subscriptionPath]) {
         subscriptions[subscriptionPath] = [];
       }

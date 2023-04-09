@@ -1,9 +1,9 @@
 <script setup>
-import Label from './tabs/label.vue'
+import Label from "./tabs/label.vue";
 
-let activeTab
+let activeTab;
 
-const tabs = [{ name: 'Label', component: Label }]
+const tabs = [{ name: "Label", component: Label }];
 </script>
 
 <template>

@@ -15,10 +15,7 @@ const emptySetter = () => {};
  * @returns The result of evaluating the expression.
  */
 
-export function evaluate(
-  expression: string,
-  dataContext: DataContext
-): EvaluationResult<any> {
+export const evaluate = (expression: string, dataContext: DataContext): EvaluationResult<any> => {
   const expressionParts = expression.split('.');
   let value: any = dataContext;
   let parent: any;
@@ -52,4 +49,4 @@ export function evaluate(
     value,
     setter
   };
-}
+};

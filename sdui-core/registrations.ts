@@ -1,25 +1,37 @@
 import { ActionHandler } from './specs/actions';
 
-export class ActionRegistry {
-  constructor(private actions: Record<string, ActionHandler> = {}) {}
-
-  registerActionHandler(type: string, handler: ActionHandler) {
-    this.actions[type] = handler;
-  }
-
-  getActionHandler(type: string): ActionHandler {
-    return this.actions[type];
-  }
+export interface RegistrationApi {
+  registerComponent: (type: string, component: any) => void;
+  getComponent: (type: string) => any;
+  getComponentRegistrations: () => Record<string, any>;
+  registerActionHandler: (type: string, handler: ActionHandler) => void;
+  getActionHandler: (type: string) => ActionHandler;
 }
 
-export class ComponentRegistry {
-  private components: { [type: string]: any } = {};
+export const buildRegistrationApi = (
+  initialComponents: Record<string, any>,
+  initialActions: Record<string, ActionHandler>
+): RegistrationApi => {
+  const components = { ...initialComponents };
+  const actions = { ...initialActions };
 
-  registerComponent(type: string, component: any) {
-    this.components[type] = component;
-  }
+  const registry: RegistrationApi = {
+    registerComponent: (type: string, component: any) => {
+      components[type] = component;
+    },
+    getComponent: (type: string) => {
+      return components[type];
+    },
+    getComponentRegistrations: () => {
+      return components;
+    },
+    registerActionHandler: (type: string, handler: ActionHandler) => {
+      actions[type] = handler;
+    },
+    getActionHandler: (type: string) => {
+      return actions[type];
+    }
+  };
 
-  getComponent(type: string): any {
-    return this.components[type];
-  }
-}
+  return registry;
+};
