@@ -1,0 +1,44 @@
+{
+  "name": "@supermatic-ui/core",
+  "version": "0.0.1",
+  "description": "Server driven UI library",
+  "author": "Suprematic UI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/https://github.com/Suprematic-UI/sdui/issues"
+  },
+  "homepage": "https://github.com/https://github.com/Suprematic-UI/sdui#readme",
+  "main": "./dist/supermatic-ui-core.umd.js",
+  "module": "./dist/supermatic-ui-core.es.js",
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Suprematic-UI/sdui.git"
+  },
+  "keywords": [
+    "no-code",
+    "low-code",
+    "server-driven-ui",
+    "vue"
+  ],
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write --config .prettierrc '**/*.ts' ."
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "eslint": "^8.38.0",
+    "prettier": "^2.8.7",
+    "typescript": "^5.0.4",
+    "vite": "^4.2.1",
+    "vite-plugin-dts": "^2.2.0"
+  }
+}

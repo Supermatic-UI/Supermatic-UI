@@ -15,8 +15,10 @@ For first time it implemented for Vue.js, but it's possible to implement it for 
 
 ### Project structure
 
-* `sdui-core` - folder contains general sources for server driven ui types and core components
-* `sdui-vue`  - folder contains implementation of server driven ui for vue.js
+* `core`           - folder contains general sources for server driven ui types and core components
+* `vue-vue`        - folder contains implementation of server driven ui for Vue.js
+* `vue-components` - folder contains Vue.js UI-Kit components
+* `vue-examples`   - folder contains Supermatic UI examples for Vue.js
 
 ## Quick start
 
@@ -28,16 +30,40 @@ You can install yarn with npm:
 npm install -g yarn
 ```
 
-1. Install dependencies
+1. Prepare core project
 
 ```BashSession
-cd sdui-vue
+cd core
 yarn install
+yarn build
 ```
 
-3. Run Vue
+For development, you can use `yarn dev` and check project with sandbox
+
+2. Prepare Vue Core
 
 ```BashSession
-cd sdui-vue
-yarn dev
+cd ../vue-core
+yarn install
+yarn build
+```
+
+For development, you can use `yarn dev` and check project with sandbox
+
+3. Prepare Vue Components
+
+```BashSession
+cd ../vue-components
+yarn install
+yarn build
+```
+
+For development, you can use `yarn dev` and check project with sandbox
+
+4. Run Vue Examples
+
+```BashSession
+cd ../vue-examples
+yarn install
+yarn build
 ```
