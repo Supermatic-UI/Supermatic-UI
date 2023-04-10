@@ -1,3 +1,5 @@
+import { http } from './actions/http';
+import { set } from './actions/set';
 import { ActionHandler } from './specs/actions';
 
 export interface RegistrationApi {
@@ -12,8 +14,14 @@ export const buildRegistrationApi = (
   initialComponents: Record<string, any>,
   initialActions: Record<string, ActionHandler> = {}
 ): RegistrationApi => {
+  const coreActions = {
+    http, set
+  }
   const components = { ...initialComponents };
-  const actions = { ...initialActions };
+  const actions = { 
+    ...coreActions,
+    ...initialActions
+   };
 
   const registry: RegistrationApi = {
     registerComponent: (type: string, component: any) => {
