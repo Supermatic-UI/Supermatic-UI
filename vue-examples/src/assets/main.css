@@ -31,3 +31,22 @@ a,
     display: display;
   }
 }
+
+.example {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ccc;
+}
+.layout {
+  height: 100%;
+}
+.example > * {
+  flex: 1;
+}
+@media (max-width: 900px) {
+  .example {
+    flex-direction: column;
+  }
+}

@@ -14,6 +14,7 @@
     "clean:node_modules": "rimraf node_modules"
   },
   "dependencies": {
+    "@monaco-editor/loader": "^1.3.3",
     "@supermatic-ui/core": "link:../core",
     "@supermatic-ui/vue-components": "link:../vue-components",
     "@supermatic-ui/vue-core": "link:../vue-core",
