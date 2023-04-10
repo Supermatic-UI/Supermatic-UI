@@ -1,9 +1,9 @@
-import { createApp } from 'vue'
-import SupermaticUi from '@supermatic-ui/vue-core'
-import App from './App.vue'
+import { createApp } from "vue";
+import { UseSupermaticUi } from "@supermatic-ui/vue-core";
+import App from "./App.vue";
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(SupermaticUi)
+app.use(UseSupermaticUi);
 
-app.mount('#app')
+app.mount("#app");

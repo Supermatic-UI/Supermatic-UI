@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { PageMetadata } from "@supermatic-ui/core/page";
-import { dataBindingBuilder } from "@supermatic-ui/core/dataBinding/dataBindingBuilder";
-import { SchemaDefinition } from "@supermatic-ui/core/specs/bindings";
-import { buildRegistrationApi, RegistrationApi } from "@supermatic-ui/core/registrations";
-import { DataBindingContainer } from "@supermatic-ui/core/dataBinding/dataBindingBuilder";
+import { buildRegistrationApi, dataBindingBuilder } from "@supermatic-ui/core";
+import type { SchemaDefinition, RegistrationApi, PageMetadata, DataBindingContainer } from "@supermatic-ui/core";
 
 const props = defineProps<{
   configuration?: PageMetadata;

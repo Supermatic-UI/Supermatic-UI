@@ -14,7 +14,7 @@ const router = createRouter({
       name: 'Form Example',
       component: () => import('../views/FormExample.vue')
     },
-    
+
     {
       path: '/actions',
       name: 'Actions Example',

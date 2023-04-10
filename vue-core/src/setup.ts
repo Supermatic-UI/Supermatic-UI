@@ -1,7 +1,7 @@
-import { Ref } from "vue";
-import { DataBindingContainer } from "@supermatic-ui/core/dataBinding/dataBindingBuilder";
-import { ControlMetadata } from "@supermatic-ui/core/specs/controls";
-import { BindingString } from "@supermatic-ui/core/specs/bindings";
+import type { Ref } from "vue";
+import type { DataBindingContainer } from "@supermatic-ui/core/dataBinding/dataBindingBuilder";
+import type { ControlMetadata } from "@supermatic-ui/core/specs/controls";
+import type { BindingString } from "@supermatic-ui/core/specs/bindings";
 
 type SetupBindResult<T> = { value: T; set: (value: T) => void };
 

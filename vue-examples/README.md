@@ -1,3 +1,3 @@
-# sdui-vue
+# Vue Examples
 
-VUe implementation for the SDUI (temporary name) framework
+Supermatic UI examples for Vue.js

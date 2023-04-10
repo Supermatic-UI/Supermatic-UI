@@ -1,18 +1,16 @@
-import SupermaticUi from './components/sdui-renderer.vue';
-import { App } from "vue"
+import SupermaticUi from "./components/sdui-renderer.vue";
+export { SupermaticUi };
+import type { App, Plugin } from "vue";
 
 const components = {
-    SupermaticUi
-}
+  SupermaticUi,
+};
 
-const install = (app: App, options) => {
+export const UseSupermaticUi: Plugin = {
+  install: (app: App) => {
     for (let componentKey in components) {
-        console.log('install component', componentKey);
-        app.component(componentKey, components[componentKey])
+      console.log("install component", componentKey);
+      app.component(componentKey, components[componentKey]);
     }
-}
-
-export default {
-    install,
-    SupermaticUi
-}
+  },
+};

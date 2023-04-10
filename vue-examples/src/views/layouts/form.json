@@ -1,31 +1,30 @@
 {
-    "type": "layout",
-    "title": "Registration form",
-    "dataBinding": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "value": ""
-        }
-      },
-      "actions": {}
-    },
-    "page": [
-      {
-        "type": "label",
-        "label": {
-          "text": "{{name}}, Welcome here! Please fill out the form below"
-        }
-      },
-      {
-        "type": "textInput",
-        "binding": "name",
-        "textInput": {
-          "label": "Name",
-          "placeholder": "Enter your name"
-        }
+  "type": "layout",
+  "title": "Registration form",
+  "dataBinding": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "value": ""
       }
-    ]
-  }
-  
+    },
+    "actions": {}
+  },
+  "page": [
+    {
+      "type": "label",
+      "label": {
+        "text": "{{name}}, Welcome here! Please fill out the form below"
+      }
+    },
+    {
+      "type": "textInput",
+      "binding": "name",
+      "textInput": {
+        "label": "Name",
+        "placeholder": "Enter your name"
+      }
+    }
+  ]
+}

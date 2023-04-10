@@ -1,3 +1,3 @@
-# sdui-vue
+# Vue Core
 
-VUe implementation for the SDUI (temporary name) framework
+VUe implementation for the Supermatic UI

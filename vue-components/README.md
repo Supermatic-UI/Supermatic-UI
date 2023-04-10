@@ -1,3 +1,3 @@
-# sdui-vue
+# Vue Components
 
-VUe implementation for the SDUI (temporary name) framework
+Component library for Vue.js

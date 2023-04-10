@@ -1,9 +1,9 @@
-import { RegistrationApi } from '../registrations';
 import { ActionBinding, ActionMetadata } from '../specs/actions';
 import { PrimitiveType, RefType, SchemaDefinition } from '../specs/bindings';
 import { evaluate, EvaluationResult } from './evaluate';
 import { evaluateTemplate } from './evaluateTemplate';
 import { createBindingStore, BindingStore, combinePath } from './bindingStore';
+import { RegistrationApi } from '../registrations';
 
 export type DataContext = Record<string, any>;
 

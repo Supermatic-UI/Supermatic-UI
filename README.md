@@ -18,7 +18,7 @@ For first time it implemented for Vue.js, but it's possible to implement it for 
 * `core`           - folder contains general sources for server driven ui types and core components
 * `vue-vue`        - folder contains implementation of server driven ui for Vue.js
 * `vue-components` - folder contains Vue.js UI-Kit components
-* `vue-examples`   - folder contains Supermatic UI examples for vue.js
+* `vue-examples`   - folder contains Supermatic UI examples for Vue.js
 
 ## Quick start
 
@@ -35,8 +35,7 @@ npm install -g yarn
 ```BashSession
 cd core
 yarn install
-yarn build-only
-yarn build:types
+yarn build
 ```
 
 For development, you can use `yarn dev` and check project with sandbox
@@ -46,8 +45,7 @@ For development, you can use `yarn dev` and check project with sandbox
 ```BashSession
 cd ../vue-core
 yarn install
-yarn build-only
-yarn build:types
+yarn build
 ```
 
 For development, you can use `yarn dev` and check project with sandbox
@@ -57,6 +55,15 @@ For development, you can use `yarn dev` and check project with sandbox
 ```BashSession
 cd ../vue-components
 yarn install
-yarn build-only
-yarn build:types
+yarn build
+```
+
+For development, you can use `yarn dev` and check project with sandbox
+
+4. Run Vue Examples
+
+```BashSession
+cd ../vue-examples
+yarn install
+yarn build
 ```

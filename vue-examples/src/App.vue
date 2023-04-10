@@ -8,12 +8,8 @@ import { RouterLink, RouterView } from 'vue-router'
     <img alt="Vue logo" class="logo" src="@/assets/vue-logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <h2>
-        Here is Supermatic UI with Vue.js example
-      </h2>
-      <p>
-        The way to build web UI with server driven approach and low-code editor
-      </p>
+      <h2>Here is Supermatic UI with Vue.js example</h2>
+      <p>The way to build web UI with server driven approach and low-code editor</p>
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
@@ -33,7 +29,6 @@ header {
   justify-content: center;
   max-height: 100vh;
   padding-bottom: 40px;
-
 }
 
 .wrapper {
@@ -91,7 +86,6 @@ nav a:first-of-type {
   }
 }
 
-
 @media (max-width: 640px) {
   header {
     flex-direction: column;
@@ -101,5 +95,4 @@ nav a:first-of-type {
     display: display;
   }
 }
-
 </style>

@@ -1,24 +1,20 @@
-import SduiButton from './components/sdui-button.vue';
-import SduiLabel from './components/sdui-label.vue';
-import SduiTetxtInput from './components/sdui-text-input.vue';
-import { App } from "vue"
+import SduiButton from "./components/sdui-button.vue";
+import SduiLabel from "./components/sdui-label.vue";
+import SduiTetxtInput from "./components/sdui-text-input.vue";
+export { SduiButton, SduiLabel, SduiTetxtInput };
+import type { App, Plugin } from "vue";
 
 const components = {
-    SduiButton,
-    SduiLabel,
-    SduiTetxtInput
-}
+  SduiButton,
+  SduiLabel,
+  SduiTetxtInput,
+};
 
-const install = (app: App, options) => {
+export const UseSupermaticUiComponents: Plugin = {
+  install: (app: App) => {
     for (let componentKey in components) {
-        console.log('install component', componentKey);
-        app.component(componentKey, components[componentKey])
+      console.log("install component", componentKey);
+      app.component(componentKey, components[componentKey]);
     }
-}
-
-export default {
-    install,
-    SduiButton,
-    SduiLabel,
-    SduiTetxtInput
-}
+  },
+};
