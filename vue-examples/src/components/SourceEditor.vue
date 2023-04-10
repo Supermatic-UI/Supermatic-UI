@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import loader from '@monaco-editor/loader';
 import { ref, onMounted } from 'vue'
+import pageMetadataSchema from '@/assets/pageMetadatSchema.json'
 
 const props = defineProps<{
   modelValue: string
@@ -10,7 +11,14 @@ const editor = ref<HTMLElement>()
 
 onMounted(() => {
   loader.init().then(monaco => {
-    console.log('languages', monaco.languages.getLanguages())
+    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+      validate: true,
+      schemas: [{
+        uri: 'http://myserver/foo-schema.json',
+        fileMatch: ['*'],
+        schema: pageMetadataSchema,
+      }]
+    })
     const instance = monaco.editor.create(editor.value!, {
       value: props.modelValue,
       language: 'json',
