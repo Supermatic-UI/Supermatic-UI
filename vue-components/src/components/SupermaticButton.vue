@@ -8,9 +8,9 @@ const label = setupTemplate(props.dataBinding, props.metadata.button.text);
 const className = setupTemplate(props.dataBinding, props.metadata.className);
 
 const click = () => {
-  console.log("[sdui-button] click");
+  console.log("[SupermaticButton] click");
   if (props.metadata.button.action) {
-    console.log("[sdui-button] action call", props.metadata.button.action);
+    console.log("[SupermaticButton] action call", props.metadata.button.action);
     props.dataBinding.handleAction(props.metadata.button.action);
   }
 };

@@ -1,5 +1,5 @@
-import SupermaticUi from "./components/sdui-renderer.vue";
-import SupermaticContainer from "./components/sdui-container.vue";
+import SupermaticUi from "./components/SupermaticUi.vue";
+import SupermaticContainer from "./components/SupermaticContainer.vue";
 export { SupermaticUi, SupermaticContainer };
 export * from "./setup";
 import type { App, Plugin } from "vue";

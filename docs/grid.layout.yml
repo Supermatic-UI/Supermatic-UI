@@ -16,7 +16,7 @@ dataBinding:
       type: http
       http:
         method: POST
-        url: https://backend.sdui.io/api/v1/registration
+        url: https://demo.supermatic.dev/api/v1/registration
         body: |
           {
             "name": "{{name}}",
@@ -33,8 +33,8 @@ page:
     gridLayout:
       gridSettings:
         columns: 12
-        rowClassName: sdui-row
-        cellClassName: sdui-cell
+        rowClassName: row
+        cellClassName: cell
       layout:
       - type: label
         label:

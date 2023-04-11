@@ -1,13 +1,13 @@
-import SduiButton from "./components/sdui-button.vue";
-import SduiLabel from "./components/sdui-label.vue";
-import SduiTetxtInput from "./components/sdui-text-input.vue";
-export { SduiButton, SduiLabel, SduiTetxtInput };
+import SupermaticButton from "./components/SupermaticButton.vue";
+import SupermaticLabel from "./components/SupermaticLabel.vue";
+import SupermaticInput from "./components/SupermaticInput.vue";
+export { SupermaticButton, SupermaticLabel, SupermaticInput };
 import type { App, Component, Plugin } from "vue";
 
 const components: Record<string, Component> = {
-  SduiButton,
-  SduiLabel,
-  SduiTetxtInput,
+  SupermaticButton,
+  SupermaticLabel,
+  SupermaticInput,
 };
 
 export const UseSupermaticUiComponents: Plugin = {

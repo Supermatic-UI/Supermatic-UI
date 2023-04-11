@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import schema from "./sandbox.json";
-import SduiLabel from "../src/components/sdui-label.vue";
-import SduiButton from "../src/components/sdui-button.vue";
-import TextIinput from "../src/components/sdui-text-input.vue";
+import SupermaticLabel from "../src/components/SupermaticLabel.vue";
+import SupermaticButton from "../src/components/SupermaticButton.vue";
+import SupermaticInput from "../src/components/SupermaticInput.vue";
 import { createRegistrations } from "@supermatic-ui/core";
 
 const onInit = (dataBinding) => {
   console.log("[sandbox] onInit", dataBinding);
 };
 const components = {
-  label: SduiLabel,
-  button: SduiButton,
-  input: TextIinput,
+  label: SupermaticLabel,
+  button: SupermaticButton,
+  input: SupermaticInput,
 };
 const registrations = createRegistrations(components);
 </script>

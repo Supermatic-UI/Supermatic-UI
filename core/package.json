@@ -5,15 +5,15 @@
   "author": "Suprematic UI",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/https://github.com/Suprematic-UI/sdui/issues"
+    "url": "https://github.com/https://github.com/Suprematic-UI/Suprematic-UI/issues"
   },
-  "homepage": "https://github.com/https://github.com/Suprematic-UI/sdui#readme",
+  "homepage": "https://github.com/https://github.com/Suprematic-UI/Suprematic-UI#readme",
   "main": "./dist/supermatic-ui-core.umd.js",
   "module": "./dist/supermatic-ui-core.es.js",
   "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Suprematic-UI/sdui.git"
+    "url": "git+https://github.com/Suprematic-UI/Suprematic-UI.git"
   },
   "keywords": [
     "no-code",

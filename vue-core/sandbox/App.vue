@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SupermaticUi from "../src/components/sdui-renderer.vue";
+import SupermaticUi from "../src/components/SupermaticUi.vue";
 import schema from "./sandbox.json";
 import { createRegistrations } from "@supermatic-ui/core";
 

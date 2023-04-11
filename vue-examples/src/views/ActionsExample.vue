@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { SupermaticUi, SupermaticContainer } from '@supermatic-ui/vue-core'
-import { SduiButton, SduiLabel, SduiTetxtInput } from '@supermatic-ui/vue-components'
+import { SupermaticButton, SupermaticLabel, SupermaticInput } from '@supermatic-ui/vue-components'
 import actions from './layouts/actions.json'
 import type { DataBindingContainer, LayoutMetadata } from '@supermatic-ui/core'
 import { createRegistrations } from '@supermatic-ui/core'
@@ -16,9 +16,9 @@ const onInit = (dataBinding: DataBindingContainer) => {
 }
 
 const components = {
-  label: SduiLabel,
-  button: SduiButton,
-  input: SduiTetxtInput,
+  label: SupermaticLabel,
+  button: SupermaticButton,
+  input: SupermaticInput,
   container: SupermaticContainer
 }
 

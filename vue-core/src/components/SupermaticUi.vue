@@ -3,7 +3,7 @@ import { createRegistrations, dataBindingBuilder } from "@supermatic-ui/core";
 import type { SchemaDefinition, Registrations, LayoutMetadata, DataBindingContainer } from "@supermatic-ui/core";
 import { ref } from "vue";
 import { setupTemplate } from "../setup";
-import SduiContainer from "./sdui-container.vue";
+import SupermaticContainer from "./SupermaticContainer.vue";
 
 const props = defineProps<{
   configuration?: LayoutMetadata;
@@ -14,9 +14,9 @@ const props = defineProps<{
 const wrapClassName = ref("");
 
 if (props.configuration && props.configuration.type === "layout") {
-  console.log("[sdui-component] configuration", props.configuration);
+  console.log("[SupermaticUi] configuration", props.configuration);
 } else {
-  console.log("[sdui-component] no configuration");
+  console.log("[SupermaticUi] no configuration");
 }
 
 let schemaDefinition: SchemaDefinition;
@@ -35,7 +35,7 @@ if (
     schemaDefinition,
     registrations ||
       createRegistrations({
-        container: SduiContainer,
+        container: SupermaticContainer,
       })
   );
   components = dataBinding.registrations.getComponentRegistrations();
@@ -46,7 +46,7 @@ if (
   }
 }
 
-console.log("[sdui-renderer] components", components);
+console.log("[SupermaticUi] components", components);
 </script>
 
 <template>

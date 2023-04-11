@@ -27,7 +27,7 @@ dataBinding:
       type: http
       http:
         method: GET
-        url: https://backend.sdui.io/api/v1/orders?page={{page}}&limit={{pageSize}}&orderBy={{orderBy}}&orderByType={{orderByType}}
+        url: https://demo.supermatic.dev/api/v1/orders?page={{page}}&limit={{pageSize}}&orderBy={{orderBy}}&orderByType={{orderByType}}
         headers:
           Authorization: Bearer {{token}}
         onResponse:
@@ -39,7 +39,7 @@ dataBinding:
       type: http
       http:
         method: DELETE
-        url: https://backend.sdui.io/api/v1/orders/{{id}}
+        url: https://demo.supermatic.dev/api/v1/orders/{{id}}
         headers:
           Authorization: Bearer {{token}}
 page:
