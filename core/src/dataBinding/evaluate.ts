@@ -16,6 +16,12 @@ const emptySetter = () => {};
  */
 
 export const evaluate = (expression: string, context: DataContext): EvaluationResult<any> => {
+  if (expression == null) {
+    return {
+      value: undefined,
+      setter: emptySetter
+    };
+  }
   const expressionParts = expression.split('.');
   let value: any = context;
   let parent: any;

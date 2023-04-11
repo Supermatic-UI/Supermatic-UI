@@ -2,8 +2,8 @@
 
 participant renderer
 
-box sdui-core
-    participant core as "sdui-core"
+box Supermatic UI
+    participant core as "@supermatic-ui/core"
     participant binding as "binding module"
     participant bindingStore as "bindingStore module"
     participant proxy as "Proxy module"

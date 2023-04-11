@@ -1,0 +1,573 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "allOf": [
+        {
+            "properties": {
+                "dataBinding": {
+                    "properties": {
+                        "actions": {
+                            "$ref": "#/definitions/Record<string,ActionMetadata>"
+                        },
+                        "properties": {
+                            "$ref": "#/definitions/Record<string,(DataSchema|{type:PrimitiveType;})&DataSchemaValue>"
+                        },
+                        "type": {
+                            "enum": [
+                                "object"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "layout": {
+                    "allOf": [
+                        {
+                            "properties": {
+                                "components": {
+                                    "items": {
+                                        "$ref": "#/definitions/GeneralComponent"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "#/definitions/Extend"
+                        }
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "layout"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        {
+            "$ref": "#/definitions/ComponentMetadata"
+        }
+    ],
+    "definitions": {
+        "ActionBinding": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/ActionMetadata"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "ActionMetadata": {
+            "allOf": [
+                {
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                {
+                    "$ref": "#/definitions/Record<string,any>"
+                }
+            ]
+        },
+        "ButtonkMetadata<{}>": {
+            "allOf": [
+                {
+                    "properties": {
+                        "button": {
+                            "properties": {
+                                "action": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ActionMetadata"
+                                        },
+                                        {
+                                            "items": {
+                                                "$ref": "#/definitions/ActionBinding"
+                                            },
+                                            "type": "array"
+                                        },
+                                        {
+                                            "type": "string"
+                                        }
+                                    ]
+                                },
+                                "text": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": {
+                            "enum": [
+                                "button"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                {
+                    "$ref": "#/definitions/ComponentMetadata"
+                }
+            ]
+        },
+        "CheckboxMetadata<{}>": {
+            "allOf": [
+                {
+                    "properties": {
+                        "checkbox": {
+                            "properties": {
+                                "label": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": {
+                            "enum": [
+                                "checkbox"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                {
+                    "$ref": "#/definitions/ComponentMetadata"
+                }
+            ]
+        },
+        "ComponentMetadata": {
+            "properties": {
+                "binding": {
+                    "type": "string"
+                },
+                "className": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "visible": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "DataTabeLayoutMetadata<{}>": {
+            "allOf": [
+                {
+                    "properties": {
+                        "dataTable": {
+                            "properties": {
+                                "add": {
+                                    "properties": {
+                                        "action": {
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "#/definitions/ActionMetadata"
+                                                },
+                                                {
+                                                    "items": {
+                                                        "$ref": "#/definitions/ActionBinding"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                {
+                                                    "type": "string"
+                                                }
+                                            ]
+                                        },
+                                        "navigate": {
+                                            "properties": {
+                                                "text": {
+                                                    "type": "string"
+                                                },
+                                                "url": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "columns": {
+                                    "items": {
+                                        "properties": {
+                                            "filter": {
+                                                "properties": {
+                                                    "enabled": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "placeholder": {
+                                                        "type": "string"
+                                                    },
+                                                    "useClientFilter": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "label": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "sort": {
+                                                "properties": {
+                                                    "action": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/ActionMetadata"
+                                                            },
+                                                            {
+                                                                "items": {
+                                                                    "$ref": "#/definitions/ActionBinding"
+                                                                },
+                                                                "type": "array"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "enabled": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "delete": {
+                                    "properties": {
+                                        "action": {
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "#/definitions/ActionMetadata"
+                                                },
+                                                {
+                                                    "items": {
+                                                        "$ref": "#/definitions/ActionBinding"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                {
+                                                    "type": "string"
+                                                }
+                                            ]
+                                        },
+                                        "prompt": {
+                                            "properties": {
+                                                "text": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "open": {
+                                    "properties": {
+                                        "action": {
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "#/definitions/ActionMetadata"
+                                                },
+                                                {
+                                                    "items": {
+                                                        "$ref": "#/definitions/ActionBinding"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                {
+                                                    "type": "string"
+                                                }
+                                            ]
+                                        },
+                                        "navigate": {
+                                            "properties": {
+                                                "text": {
+                                                    "type": "string"
+                                                },
+                                                "url": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "pageSize": {
+                                    "properties": {
+                                        "action": {
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "#/definitions/ActionMetadata"
+                                                },
+                                                {
+                                                    "items": {
+                                                        "$ref": "#/definitions/ActionBinding"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                {
+                                                    "type": "string"
+                                                }
+                                            ]
+                                        },
+                                        "currentSize": {
+                                            "type": "string"
+                                        },
+                                        "sizes": {
+                                            "items": {
+                                                "type": "number"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": {
+                            "enum": [
+                                "dataTable"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                {
+                    "$ref": "#/definitions/ComponentMetadata"
+                }
+            ]
+        },
+        "Extend": {
+            "properties": {
+                "wrap": {
+                    "type": "boolean"
+                },
+                "wrapClassName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "GeneralComponent": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/ComponentMetadata"
+                },
+                {
+                    "$ref": "#/definitions/ButtonkMetadata<{}>"
+                },
+                {
+                    "$ref": "#/definitions/CheckboxMetadata<{}>"
+                },
+                {
+                    "$ref": "#/definitions/DataTabeLayoutMetadata<{}>"
+                },
+                {
+                    "$ref": "#/definitions/GridLayoutMetadata<{}>"
+                },
+                {
+                    "$ref": "#/definitions/LabelMetadata<{}>"
+                },
+                {
+                    "$ref": "#/definitions/LinkMetadata<{}>"
+                },
+                {
+                    "$ref": "#/definitions/InputMetadata<{}>"
+                }
+            ]
+        },
+        "GridLayoutMetadata<{}>": {
+            "allOf": [
+                {
+                    "properties": {
+                        "gridLayout": {
+                            "properties": {
+                                "gridSettings": {
+                                    "properties": {
+                                        "cellClassName": {
+                                            "type": "string"
+                                        },
+                                        "columns": {
+                                            "type": "number"
+                                        },
+                                        "rowClassName": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "layout": {
+                                    "items": {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/ComponentMetadata"
+                                            },
+                                            {
+                                                "properties": {
+                                                    "cell": {
+                                                        "type": "number"
+                                                    },
+                                                    "row": {
+                                                        "type": "number"
+                                                    },
+                                                    "size": {
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        ]
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": {
+                            "enum": [
+                                "gridLayout"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                {
+                    "$ref": "#/definitions/ComponentMetadata"
+                }
+            ]
+        },
+        "InputMetadata<{}>": {
+            "allOf": [
+                {
+                    "properties": {
+                        "input": {
+                            "properties": {
+                                "inputClassName": {
+                                    "type": "string"
+                                },
+                                "inputType": {
+                                    "type": "string"
+                                },
+                                "label": {
+                                    "type": "string"
+                                },
+                                "labelClassName": {
+                                    "type": "string"
+                                },
+                                "placeholder": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": {
+                            "enum": [
+                                "input"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                {
+                    "$ref": "#/definitions/ComponentMetadata"
+                }
+            ]
+        },
+        "LabelMetadata<{}>": {
+            "allOf": [
+                {
+                    "properties": {
+                        "label": {
+                            "properties": {
+                                "text": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": {
+                            "enum": [
+                                "label"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                {
+                    "$ref": "#/definitions/ComponentMetadata"
+                }
+            ]
+        },
+        "LinkMetadata<{}>": {
+            "allOf": [
+                {
+                    "properties": {
+                        "link": {
+                            "properties": {
+                                "text": {
+                                    "type": "string"
+                                },
+                                "url": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": {
+                            "enum": [
+                                "link"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                {
+                    "$ref": "#/definitions/ComponentMetadata"
+                }
+            ]
+        },
+        "Record<string,(DataSchema|{type:PrimitiveType;})&DataSchemaValue>": {
+            "type": "object"
+        },
+        "Record<string,ActionMetadata>": {
+            "type": "object"
+        },
+        "Record<string,any>": {
+            "type": "object"
+        }
+    }
+}
+

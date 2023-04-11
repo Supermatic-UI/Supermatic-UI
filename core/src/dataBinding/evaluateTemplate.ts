@@ -11,6 +11,9 @@ import { evaluate } from './evaluate';
  */
 export const evaluateTemplate = (template: string, context: DataContext, dependencies?: string[]): string => {
   console.log('[dataBinding-evaluateTemplate] evaluateTemplate: ', template, context);
+  if (template == null) {
+    return '';
+  }
   // Use a buffer to avoid creating a new string for each concatenation.
   const buffer: string[] = [];
   let startIndex = 0;

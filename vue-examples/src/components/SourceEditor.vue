@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import loader from '@monaco-editor/loader';
+import loader from '@monaco-editor/loader'
 import { ref, onMounted } from 'vue'
 import pageMetadataSchema from '@/assets/pageMetadatSchema.json'
 
@@ -10,24 +10,29 @@ const emit = defineEmits(['update:modelValue'])
 const editor = ref<HTMLElement>()
 
 onMounted(() => {
-  loader.init().then(monaco => {
+  loader.init().then((monaco) => {
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
       validate: true,
-      schemas: [{
-        uri: 'http://myserver/foo-schema.json',
-        fileMatch: ['*'],
-        schema: pageMetadataSchema,
-      }]
+      schemas: [
+        {
+          uri: 'http://myserver/foo-schema.json',
+          fileMatch: ['*'],
+          schema: pageMetadataSchema
+        }
+      ]
     })
     const instance = monaco.editor.create(editor.value!, {
       value: props.modelValue,
       language: 'json',
       theme: 'vs-dark',
-    });
+      minimap: {
+        enabled: false
+      }
+    })
     instance.onDidChangeModelContent(() => {
       emit('update:modelValue', instance.getValue())
     })
-  });
+  })
 })
 </script>
 

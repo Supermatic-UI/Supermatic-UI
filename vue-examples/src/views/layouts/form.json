@@ -6,25 +6,31 @@
     "properties": {
       "name": {
         "type": "string",
-        "value": ""
+        "value": "Developer"
       }
     },
     "actions": {}
   },
-  "page": [
-    {
-      "type": "label",
-      "label": {
-        "text": "{{name}}, Welcome here! Please fill out the form below"
+  "layout": {
+    "components": [
+      {
+        "type": "label",
+        "className": "form-label",
+        "label": {
+          "text": "{{name}}, Welcome here! Please fill out the form below"
+        }
+      },
+      {
+        "type": "input",
+        "className": "mb-3",
+        "binding": "name",
+        "input": {
+          "label": "Name",
+          "labelClassName": "form-label",
+          "inputClassName": "form-control",
+          "placeholder": "Enter your name"
+        }
       }
-    },
-    {
-      "type": "textInput",
-      "binding": "name",
-      "textInput": {
-        "label": "Name",
-        "placeholder": "Enter your name"
-      }
-    }
-  ]
+    ]
+  }
 }

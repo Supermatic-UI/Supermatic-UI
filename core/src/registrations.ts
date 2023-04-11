@@ -2,7 +2,7 @@ import { http } from './actions/http';
 import { set } from './actions/set';
 import { ActionHandler } from './specs/actions';
 
-export interface RegistrationApi {
+export interface Registrations {
   registerComponent: (type: string, component: any) => void;
   getComponent: (type: string) => any;
   getComponentRegistrations: () => Record<string, any>;
@@ -10,20 +10,21 @@ export interface RegistrationApi {
   getActionHandler: (type: string) => ActionHandler;
 }
 
-export const buildRegistrationApi = (
+export const createRegistrations = (
   initialComponents: Record<string, any>,
   initialActions: Record<string, ActionHandler> = {}
-): RegistrationApi => {
+): Registrations => {
   const coreActions = {
-    http, set
-  }
+    http,
+    set
+  };
   const components = { ...initialComponents };
-  const actions = { 
+  const actions = {
     ...coreActions,
     ...initialActions
-   };
+  };
 
-  const registry: RegistrationApi = {
+  const registry: Registrations = {
     registerComponent: (type: string, component: any) => {
       components[type] = component;
     },

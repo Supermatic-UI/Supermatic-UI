@@ -12,7 +12,7 @@
     "format": "prettier --write src/",
     "clean": "rimraf dist",
     "clean:node_modules": "rimraf node_modules",
-    "update-schema": "copyfiles --flat ../core/dist/pageMetadatSchema.json ./src/assets"
+    "update-schema": "copyfiles --flat ../core/dist/layoutMetadataSchema.json ./src/assets"
   },
   "dependencies": {
     "@monaco-editor/loader": "^1.3.3",
