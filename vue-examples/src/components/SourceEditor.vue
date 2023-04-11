@@ -23,7 +23,7 @@ onMounted(() => {
     })
     const instance = monaco.editor.create(editor.value!, {
       value: props.modelValue,
-      language: 'json',
+      language: 'yaml',
       theme: 'vs-dark',
       minimap: {
         enabled: false

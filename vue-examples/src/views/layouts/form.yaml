@@ -1,0 +1,32 @@
+---
+type: layout
+title: Registration form
+# dataBinding works like context
+dataBinding:
+  type: object
+  # properties definitions required only for value initializaation
+  # or for low code editor
+  properties:
+    name:
+      type: string
+      value: Developer
+  actions: {}
+# layout contains components definition for this page
+layout:
+  # for components you can use any of the following types:
+  # - button, checkbox, input, label, container, etc..
+  components:
+  - type: label
+    className: form-label
+    label:
+      # In properties you can use templating syntax with {{ }} brackets
+      text: "{{name}}, Welcome here! Please fill out the form below"
+  - type: input
+    className: mb-3
+    # Also you can bind input value to context property called 'name'
+    binding: name
+    input:
+      label: Name
+      labelClassName: form-label
+      inputClassName: form-control
+      placeholder: Enter your name

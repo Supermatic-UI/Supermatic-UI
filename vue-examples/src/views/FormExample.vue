@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import YAML from 'yaml'
 import { SupermaticUi, SupermaticContainer } from '@supermatic-ui/vue-core'
 import { SupermaticButton, SupermaticLabel, SupermaticInput } from '@supermatic-ui/vue-components'
-import form from './layouts/form.json'
+import { plainText as formYaml} from './layouts/form.yaml'
 import type { DataBindingContainer, LayoutMetadata } from '@supermatic-ui/core'
 import { createRegistrations } from '@supermatic-ui/core'
 import SourceEditor from '../components/SourceEditor.vue'
 
-const source = ref(JSON.stringify(form, null, 2))
-const schema = ref<LayoutMetadata>(form)
+const source = ref(formYaml)
+const schema = ref<LayoutMetadata>(YAML.parse(formYaml))
 const componentKey = ref(0)
 
 const onInit = (dataBinding: DataBindingContainer) => {
@@ -24,7 +25,7 @@ const components = {
 const registrations = createRegistrations(components)
 const updateSchema = (value: string) => {
   try {
-    schema.value = JSON.parse(value)
+    schema.value = YAML.parse(value)
     forceRerender()
   } catch (error) {
     // ignore
