@@ -1,5 +1,7 @@
 # Supermatic UI
 
+![docs/logo.png](docs/logo.png)
+
 Supermatic UI is a project to provide a simple way to create web-fronend UI using server driven UI approach and low-code editor to increase productivity of web developers.
 
 Best use cases for this project are:
