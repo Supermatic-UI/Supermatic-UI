@@ -2,14 +2,15 @@ import { ActionBinding, ActionMetadata } from '../specs/actions';
 import { PrimitiveType, RefType, SchemaDefinition } from '../specs/bindings';
 import { evaluate, EvaluationResult } from './evaluate';
 import { evaluateTemplate } from './evaluateTemplate';
-import { createBindingStore, BindingStore, combinePath } from './bindingStore';
-import { RegistrationApi } from '../registrations';
+import { createBindingStore, BindingStore } from './bindingStore';
+import { Registrations, createRegistrations } from '../registrations';
+import { combinePath } from '../utils/combinePath';
 
 export type DataContext = Record<string, any>;
 
 type RendererReactivitySubscriptionHandler<T> = (value: T) => void;
 
-export interface DataBindingContainer {
+export type DataBindingContainer = {
   /**
    * Sets the value of the specified property in the data object.
    * Supports getting nested properties using dot notation (e.g. "objectProperty.insideProperty")
@@ -51,7 +52,9 @@ export interface DataBindingContainer {
   evaluateTemplateReactive(template: string): ReactivityContainer<string>;
 
   handleAction(actionBinding: ActionBinding | ActionBinding[], applyContext?: Record<string, any>): void;
-}
+
+  registrations: Registrations;
+};
 
 export type ReactivityContainer<T> = {
   value: T;
@@ -60,7 +63,6 @@ export type ReactivityContainer<T> = {
 
 type InternalDataBindingContainer = DataBindingContainer & {
   schema: SchemaDefinition;
-  registrations: RegistrationApi;
   context: DataContext;
   bindingStore: BindingStore;
   internalEvaluate: (expression: string) => EvaluationResult;
@@ -106,7 +108,7 @@ const dataBindingWrapperBuilder = (
 export const dataBindingBuilder = (
   initial: DataContext,
   schema: SchemaDefinition,
-  registrations: RegistrationApi
+  registrations?: Registrations
 ): DataBindingContainer => {
   const bindingStore: BindingStore = createBindingStore();
 
@@ -119,12 +121,12 @@ export const dataBindingBuilder = (
     evaluateReactive: (expression) => evaluateReactive(internalContainer, expression),
     evaluateTemplate: (template) => internalEvaluateTemplate(internalContainer, template),
     evaluateTemplateReactive: (template) => evaluateTemplateReactive(internalContainer, template),
-    handleAction: (actionBinding, applyContext) => handleAction(internalContainer, actionBinding, applyContext)
+    handleAction: (actionBinding, applyContext) => handleAction(internalContainer, actionBinding, applyContext),
+    registrations: registrations ?? createRegistrations({})
   };
   const internalContainer = {
     ...dataBinding,
     schema,
-    registrations,
     context,
     bindingStore,
     internalEvaluate: (expression) => internalEvaluate(internalContainer, expression)

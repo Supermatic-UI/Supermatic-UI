@@ -1,18 +1,15 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { DataBindingContainer } from "@supermatic-ui/core/dataBinding/dataBindingBuilder";
-import { LabelMetadata } from "@supermatic-ui/core/general-components/label/labelMetadata";
-import { setupTemplate } from "@supermatic-ui/vue-core/src/setup";
+import type { DataBindingContainer, LabelMetadata } from "@supermatic-ui/core";
+import { setupTemplate } from "@supermatic-ui/vue-core";
 
 const props = defineProps<{ metadata: LabelMetadata; dataBinding: DataBindingContainer }>();
 
-let labelRef = ref("");
-
-setupTemplate(props.dataBinding, props.metadata, props.metadata.label.text, labelRef);
+const label = setupTemplate(props.dataBinding, props.metadata.label.text);
+const className = setupTemplate(props.dataBinding, props.metadata.className);
 </script>
 
 <template>
-  <span>{{ labelRef }}</span>
+  <span :class="className">{{ label }}</span>
 </template>
 
 <style scoped></style>

@@ -1,3 +1,4 @@
+import { combinePath } from '../utils/combinePath';
 import { DataContext } from './dataBindingBuilder';
 
 export type SubscriptionHandler = () => void;
@@ -6,8 +7,6 @@ export type BindingStore = {
   createMainProxy: (obj: any) => DataContext;
   subscribe: (path: string, callback: SubscriptionHandler) => void;
 };
-
-export const combinePath = (path: string, key: string): string => (path === '' ? key : `${path}.${key}`);
 
 export const createBindingStore = (): BindingStore => {
   let mainProxy: any;

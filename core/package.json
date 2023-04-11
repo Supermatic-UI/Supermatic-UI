@@ -26,7 +26,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && typescript-json-schema ./tsconfig.json PageMetadata -o ./dist/pageMetadatSchema.json",
+    "build": "tsc && vite build && typescript-json-schema ./tsconfig.json LayoutMetadata -o ./dist/layoutMetadataSchema.json",
     "preview": "vite preview",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write --config .prettierrc '**/*.ts' ."

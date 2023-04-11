@@ -1,9 +1,12 @@
 import SupermaticUi from "./components/sdui-renderer.vue";
-export { SupermaticUi };
+import SupermaticContainer from "./components/sdui-container.vue";
+export { SupermaticUi, SupermaticContainer };
+export * from "./setup";
 import type { App, Plugin } from "vue";
 
 const components = {
   SupermaticUi,
+  SupermaticContainer,
 };
 
 export const UseSupermaticUi: Plugin = {

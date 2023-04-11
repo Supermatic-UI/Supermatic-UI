@@ -11,20 +11,22 @@
     },
     "actions": {}
   },
-  "page": [
-    {
-      "type": "label",
-      "label": {
-        "text": "{{name}}, Welcome here! Please fill out the form below"
+  "layout": {
+    "components": [
+      {
+        "type": "label",
+        "label": {
+          "text": "{{name}}, Welcome here! Please fill out the form below"
+        }
+      },
+      {
+        "type": "input",
+        "binding": "name",
+        "input": {
+          "label": "Name",
+          "placeholder": "Enter your name"
+        }
       }
-    },
-    {
-      "type": "textInput",
-      "binding": "name",
-      "textInput": {
-        "label": "Name",
-        "placeholder": "Enter your name"
-      }
-    }
-  ]
+    ]
+  }
 }

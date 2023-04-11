@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import { DataBindingContainer } from "@supermatic-ui/core/dataBinding/dataBindingBuilder";
-import { ButtonkMetadata } from "@supermatic-ui/core/general-components/button/buttonMetadata";
-import { ref } from "vue";
-import { setupTemplate } from "@supermatic-ui/vue-core/src/setup";
+import type { DataBindingContainer, ButtonkMetadata } from "@supermatic-ui/core";
+import { setupTemplate } from "@supermatic-ui/vue-core";
 
 const props = defineProps<{ metadata: ButtonkMetadata; dataBinding: DataBindingContainer }>();
 
-let labelRef = ref("");
-
-setupTemplate(props.dataBinding, props.metadata, props.metadata.button.text, labelRef);
+const label = setupTemplate(props.dataBinding, props.metadata.button.text);
+const className = setupTemplate(props.dataBinding, props.metadata.className);
 
 const click = () => {
   console.log("[sdui-button] click");
@@ -20,7 +17,7 @@ const click = () => {
 </script>
 
 <template>
-  <button @click="click()">{{ labelRef }}</button>
+  <button :class="className" @click="click()">{{ label }}</button>
 </template>
 
 <style scoped></style>

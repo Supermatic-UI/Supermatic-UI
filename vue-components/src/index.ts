@@ -2,9 +2,9 @@ import SduiButton from "./components/sdui-button.vue";
 import SduiLabel from "./components/sdui-label.vue";
 import SduiTetxtInput from "./components/sdui-text-input.vue";
 export { SduiButton, SduiLabel, SduiTetxtInput };
-import type { App, Plugin } from "vue";
+import type { App, Component, Plugin } from "vue";
 
-const components = {
+const components: Record<string, Component> = {
   SduiButton,
   SduiLabel,
   SduiTetxtInput,

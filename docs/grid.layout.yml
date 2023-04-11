@@ -42,9 +42,9 @@ page:
         size: 12
         row: 0
         cell: 0
-      - type: textInput
+      - type: input
         binding: name
-        textInput:
+        input:
           label: Name
           placeholder: Enter your name
         size: 4

@@ -1,8 +1,9 @@
 import { BindingString } from './bindings';
 
-export interface ControlMetadata {
+export interface ComponentMetadata {
   type: string;
   binding?: BindingString;
   enabled?: BindingString;
   visible?: BindingString;
+  className?: BindingString;
 }

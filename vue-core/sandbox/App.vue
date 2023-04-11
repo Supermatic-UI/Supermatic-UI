@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import SupermaticUi from "../src/components/sdui-renderer.vue";
 import schema from "./sandbox.json";
-import { buildRegistrationApi } from "@supermatic-ui/core";
+import { createRegistrations } from "@supermatic-ui/core";
 
 const onInit = (dataBinding) => {
   console.log("[sandbox] onInit", dataBinding);
 };
 const components = {};
-const registrations = buildRegistrationApi(components);
+const registrations = createRegistrations(components);
 </script>
 
 <template>
