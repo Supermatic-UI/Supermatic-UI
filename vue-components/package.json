@@ -1,12 +1,12 @@
 {
   "name": "@supermatic-ui/vue-components",
   "version": "0.0.1",
-  "author": "Suprematic UI",
+  "author": "Supermatic UI",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/https://github.com/Suprematic-UI/Suprematic-UI/issues"
+    "url": "https://github.com/Supermatic-UI/Supermatic-UI/issues"
   },
-  "homepage": "https://github.com/https://github.com/Suprematic-UI/Suprematic-UI#readme",
+  "homepage": "https://github.com/Supermatic-UI/Supermatic-UI#readme",
   "files": [
     "dist"
   ],
@@ -15,7 +15,7 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Suprematic-UI/Suprematic-UI.git"
+    "url": "git+https://github.com/Supermatic-UI/Supermatic-UI.git"
   },
   "keywords": [
     "no-code",
