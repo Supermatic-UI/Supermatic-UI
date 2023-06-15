@@ -27,14 +27,6 @@ jobs:
         run: yarn install --frozen-lockfile
         working-directory: ${{ inputs.dir }}
 
-      # - name: Check latest version
-      #   run: echo "LATEST_VERSION=$(npm view <package-name> version)" >> $GITHUB_ENV
-      #   working-directory: ${{ inputs.dir }}
-
-      # - name: Bump version
-      #   run: yarn version --new-version ${{ env.LATEST_VERSION }}
-      #   working-directory: ${{ inputs.dir }}
-
       - name: Build
         run: yarn build
         working-directory: ${{ inputs.dir }}
@@ -43,5 +35,5 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Publish package
-        run: yarn publish --non-interactive
+        run: yarn npm publish --tolerate-republish --access public
         working-directory: ${{ inputs.dir }}
