@@ -15,7 +15,7 @@ export const useTemplate = (
     const [_, setValue] = state;
     setValue(reactivity.value);
     reactivity.subscribe((value) => {
-      console.log('[useTemplate] updating value change from context', value)
+      console.log("[useTemplate] updating value change from context", value);
       setValue(value);
     });
   }, [dataBinding, template, state]);
@@ -68,7 +68,7 @@ export const useBind = <T,>(
       setValue(arg);
       if (reactivity) {
         const newValue = typeof arg === "function" ? (arg as (v: T | null) => T | null)(stateValue) : arg;
-        console.log('[useBind] setting value', newValue)
+        console.log("[useBind] setting value", newValue);
         reactivity.updateValue(newValue);
       }
     },

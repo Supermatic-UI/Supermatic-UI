@@ -18,22 +18,25 @@ const SupermaticLabel = (props: SupermaticLabelProps) => {
   const [inputType] = useTemplate(dataBinding, metadata.input.inputType);
   const [placeholder] = useTemplate(dataBinding, metadata.input.placeholder);
   const [className] = useTemplate(dataBinding, metadata.className);
-  
+
   const [value, setValue] = useBind<InputRawValue>(dataBinding, metadata.binding);
 
-  const updateInputValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    console.log('[SupermaticLabel] setValue', newValue)
-    setValue(newValue)
-  }, [setValue]);
-  
+  const updateInputValue = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
+      console.log("[SupermaticLabel] setValue", newValue);
+      setValue(newValue);
+    },
+    [setValue]
+  );
+
   return (
     <>
       <div className={className}>
-        <label className={labelClassName}>{ label }</label>
+        <label className={labelClassName}>{label}</label>
         <input
           type={inputType}
-          value={value || ''}
+          value={value || ""}
           onChange={updateInputValue}
           placeholder={placeholder}
           className={inputClassName}
