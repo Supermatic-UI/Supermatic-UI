@@ -1,18 +1,20 @@
 {
   "name": "@supermatic-ui/vue-core",
   "version": "0.0.1",
+  "description": "Server driven UI library with vue implementation",
   "author": "Supermatic UI",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Supermatic-UI/Supermatic-UI/issues"
   },
   "homepage": "https://github.com/Supermatic-UI/Supermatic-UI#readme",
-  "files": [
-    "dist"
-  ],
+  "type": "module",
   "main": "dist/supermatic-ui-vue-core.umd.js",
   "module": "dist/supermatic-ui-vue-core.es.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Supermatic-UI/Supermatic-UI.git"

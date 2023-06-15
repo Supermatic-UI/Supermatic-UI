@@ -1,18 +1,20 @@
 {
   "name": "@supermatic-ui/react-components",
   "version": "0.0.1",
+  "description": "Server driven UI library with react components",
   "author": "Supermatic UI",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/https://github.com/Supermatic-UI/Supermatic-UI/issues"
   },
   "homepage": "https://github.com/https://github.com/Supermatic-UI/Supermatic-UI#readme",
-  "files": [
-    "dist"
-  ],
+  "type": "module",
   "main": "dist/supermatic-ui-react-components.umd.js",
   "module": "dist/supermatic-ui-react-components.es.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Supermatic-UI/Supermatic-UI.git"
@@ -23,7 +25,6 @@
     "server-driven-ui",
     "react"
   ],
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

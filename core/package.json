@@ -8,9 +8,13 @@
     "url": "https://github.com/Supermatic-UI/Supermatic-UI/issues"
   },
   "homepage": "https://github.com/Supermatic-UI/Supermatic-UI#readme",
+  "type": "module",
   "main": "./dist/supermatic-ui-core.umd.js",
   "module": "./dist/supermatic-ui-core.es.js",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Supermatic-UI/Supermatic-UI.git"
