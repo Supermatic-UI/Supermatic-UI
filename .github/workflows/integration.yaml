@@ -8,7 +8,7 @@ jobs:
 
   core:
     name: Publish @supermatic-ui/core NPM package
-    uses: ./npmjs_script.yaml
+    uses: ./.github/workflows/npmjs_script.yaml
     with:
       dir: core
     secrets:
@@ -16,7 +16,7 @@ jobs:
 
   react-core:
     name: Publish @supermatic-ui/react-core NPM package
-    uses: ./npmjs_script.yaml
+    uses: ./.github/workflows/npmjs_script.yaml
     with:
       dir: react-core
     secrets:
@@ -24,7 +24,7 @@ jobs:
 
   react-components:
     name: Publish @supermatic-ui/react-components NPM package
-    uses: ./npmjs_script.yaml
+    uses: ./.github/workflows/npmjs_script.yaml
     with:
       dir: react-components
     secrets:
@@ -32,7 +32,7 @@ jobs:
 
   vue-core:
     name: Publish @supermatic-ui/vue-core NPM package
-    uses: ./npmjs_script.yaml
+    uses: ./.github/workflows/npmjs_script.yaml
     with:
       dir: vue-core
     secrets:
@@ -40,7 +40,7 @@ jobs:
 
   vue-components:
     name: Publish @supermatic-ui/vue-components NPM package
-    uses: ./npmjs_script.yaml
+    uses: ./.github/workflows/npmjs_script.yaml
     with:
       dir: vue-components
     secrets:
