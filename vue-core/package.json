@@ -1,6 +1,7 @@
 {
   "name": "@supermatic-ui/vue-core",
   "version": "0.0.1",
+  "private": false,
   "description": "Server driven UI library with vue implementation",
   "author": "Supermatic UI",
   "license": "MIT",
@@ -70,5 +71,8 @@
     "vite-plugin-dts": "^2.2.0",
     "vitest": "^0.29.1",
     "vue-tsc": "^1.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

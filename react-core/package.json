@@ -1,6 +1,7 @@
 {
   "name": "@supermatic-ui/react-core",
   "version": "0.0.1",
+  "private": false,
   "description": "Server driven UI library with react implementation",
   "author": "Supermatic UI",
   "license": "MIT",
@@ -51,5 +52,8 @@
     "typescript": "^5.0.2",
     "vite": "^4.3.2",
     "vite-plugin-dts": "^2.3.0"
-  }
+  },
+  "publishConfig": {
+  "access": "public"
+}
 }

@@ -1,6 +1,7 @@
 {
   "name": "@supermatic-ui/core",
   "version": "0.0.1",
+  "private": false,
   "description": "Server driven UI library",
   "author": "Supermatic UI",
   "license": "MIT",
@@ -44,5 +45,8 @@
     "typescript-json-schema": "^0.56.0",
     "vite": "^4.2.1",
     "vite-plugin-dts": "^2.2.0"
+  },
+    "publishConfig": {
+    "access": "public"
   }
 }

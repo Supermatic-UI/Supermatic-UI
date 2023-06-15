@@ -18,49 +18,65 @@ jobs:
         with:
           node-version: 14
 
-      - name: Install dependencies
+      - name: Install dependencies for core
         run: yarn install --frozen-lockfile
         working-directory: core
 
-      - name: Build
+      - name: Install dependencies for vue-core
+        run: yarn install --frozen-lockfile
+        working-directory: vue-core
+
+      - name: Install dependencies for react-core
+        run: yarn install --frozen-lockfile
+        working-directory: react-core
+
+      - name: Install dependencies for vue-components
+        run: yarn install --frozen-lockfile
+        working-directory: vue-components
+
+      - name: Install dependencies for react-components
+        run: yarn install --frozen-lockfile
+        working-directory: react-components
+
+      - name: Build for core
         run: yarn build
         working-directory: core
+
+      - name: Build for vue-core
+        run: yarn build
+        working-directory: vue-core
+
+      - name: Build for react-core
+        run: yarn build
+        working-directory: react-core
+
+      - name: Build for vue-components
+        run: yarn build
+        working-directory: vue-components
+        
+      - name: Build for react-components
+        run: yarn build
+        working-directory: react-components
         
       - name: Authenticate with npm
         run: echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
-      - name: Publish package
-        run: npm publish --tolerate-republish --access public
+      - name: Publish package for core
+        run: npm publish --tolerate-republish
         working-directory: core
 
-  # react-core:
-  #   name: Publish @supermatic-ui/react-core NPM package
-  #   uses: ./.github/workflows/npmjs_script.yaml
-  #   with:
-  #     dir: react-core
-  #   secrets:
-  #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish package for vue-core
+        run: npm publish --tolerate-republish
+        working-directory: vue-core
 
-  # react-components:
-  #   name: Publish @supermatic-ui/react-components NPM package
-  #   uses: ./.github/workflows/npmjs_script.yaml
-  #   with:
-  #     dir: react-components
-  #   secrets:
-  #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish package for react-core
+        run: npm publish --tolerate-republish
+        working-directory: react-core
 
-  # vue-core:
-  #   name: Publish @supermatic-ui/vue-core NPM package
-  #   uses: ./.github/workflows/npmjs_script.yaml
-  #   with:
-  #     dir: vue-core
-  #   secrets:
-  #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish package for vue-components
+        run: npm publish --tolerate-republish
+        working-directory: vue-components
 
-  # vue-components:
-  #   name: Publish @supermatic-ui/vue-components NPM package
-  #   uses: ./.github/workflows/npmjs_script.yaml
-  #   with:
-  #     dir: vue-components
-  #   secrets:
-  #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish package for react-components
+        run: npm publish --tolerate-republish
+        working-directory: react-components
