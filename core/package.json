@@ -2,18 +2,18 @@
   "name": "@supermatic-ui/core",
   "version": "0.0.1",
   "description": "Server driven UI library",
-  "author": "Suprematic UI",
+  "author": "Supermatic UI",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/https://github.com/Suprematic-UI/Suprematic-UI/issues"
+    "url": "https://github.com/Supermatic-UI/Supermatic-UI/issues"
   },
-  "homepage": "https://github.com/https://github.com/Suprematic-UI/Suprematic-UI#readme",
+  "homepage": "https://github.com/Supermatic-UI/Supermatic-UI#readme",
   "main": "./dist/supermatic-ui-core.umd.js",
   "module": "./dist/supermatic-ui-core.es.js",
   "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Suprematic-UI/Suprematic-UI.git"
+    "url": "git+https://github.com/Supermatic-UI/Supermatic-UI.git"
   },
   "keywords": [
     "no-code",
