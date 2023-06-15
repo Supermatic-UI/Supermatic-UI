@@ -59,7 +59,7 @@ jobs:
         working-directory: react-components
         
       - name: Authenticate with npm
-        run: echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Publish package for core
         run: npm publish --tolerate-republish
