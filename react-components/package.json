@@ -21,7 +21,7 @@
     "no-code",
     "low-code",
     "server-driven-ui",
-    "vue"
+    "react"
   ],
   "type": "module",
   "scripts": {

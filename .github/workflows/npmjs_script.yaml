@@ -1,0 +1,47 @@
+name: Pull Request Comments
+
+on:
+  workflow_call:
+    inputs:
+      dir:
+        type: string
+        required: true
+    secrets:
+      NPM_TOKEN:
+        required: true
+
+jobs:
+  deploy:
+    name: Publish NPM package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+        working-directory: ${{ inputs.dir }}
+
+      - name: Check latest version
+        run: echo "::set-env name=LATEST_VERSION::$(npm view <package-name> version)"
+        working-directory: ${{ inputs.dir }}
+
+      - name: Bump version
+        run: yarn version --new-version ${{ env.LATEST_VERSION }}
+        working-directory: ${{ inputs.dir }}
+
+      - name: Build
+        run: yarn build
+        working-directory: ${{ inputs.dir }}
+        
+      - name: Authenticate with npm
+        run: echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      - name: Publish package
+        run: yarn publish --non-interactive
+        working-directory: ${{ inputs.dir }}

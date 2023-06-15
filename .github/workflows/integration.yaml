@@ -1,0 +1,47 @@
+name: Deploy NPM Package
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  core:
+    name: Publish @supermatic-ui/core NPM package
+    uses: ./npmjs_script.yaml
+    with:
+      dir: core
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  react-core:
+    name: Publish @supermatic-ui/react-core NPM package
+    uses: ./npmjs_script.yaml
+    with:
+      dir: react-core
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  react-components:
+    name: Publish @supermatic-ui/react-components NPM package
+    uses: ./npmjs_script.yaml
+    with:
+      dir: react-components
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  vue-core:
+    name: Publish @supermatic-ui/vue-core NPM package
+    uses: ./npmjs_script.yaml
+    with:
+      dir: vue-core
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  vue-components:
+    name: Publish @supermatic-ui/vue-components NPM package
+    uses: ./npmjs_script.yaml
+    with:
+      dir: vue-components
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
