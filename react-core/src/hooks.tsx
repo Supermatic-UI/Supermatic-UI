@@ -1,5 +1,5 @@
 import type { DataBindingContainer, BindingString } from "@supermatic-ui/core";
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useCallback, useEffect, useState } from "react";
 
 type ReactState<T> = [T, (value: SetStateAction<T>) => void];
 
@@ -15,9 +15,10 @@ export const useTemplate = (
     const [_, setValue] = state;
     setValue(reactivity.value);
     reactivity.subscribe((value) => {
+      console.log('[useTemplate] updating value change from context', value)
       setValue(value);
     });
-  }, [dataBinding, template]);
+  }, [dataBinding, template, state]);
 
   return state;
 };
@@ -25,8 +26,8 @@ export const useTemplate = (
 export const useEval = <T,>(
   dataBinding: DataBindingContainer,
   expression: BindingString | undefined
-): ReactState<T | undefined> => {
-  const state = useState<T | undefined>(undefined);
+): ReactState<T | null> => {
+  const state = useState<T | null>(null);
 
   useEffect(() => {
     const [_, setValue] = state;
@@ -35,7 +36,7 @@ export const useEval = <T,>(
     reactivity.subscribe((value) => {
       setValue(value);
     });
-  }, [dataBinding, expression]);
+  }, [dataBinding, expression, state]);
 
   return state;
 };
@@ -43,23 +44,36 @@ export const useEval = <T,>(
 export const useBind = <T,>(
   dataBinding: DataBindingContainer,
   binding: BindingString | undefined
-): ReactState<T | undefined> => {
-  const state = useState<T | undefined>(undefined);
+): ReactState<T | null> => {
+  const [stateValue, setValue] = useState<T | null>(null);
+  const [reactivity, setReactivity] = useState<ReturnType<typeof dataBinding.evaluateReactive> | null>(null);
 
   useEffect(() => {
     if (!binding) return;
 
-    const [_, setValue] = state;
     const property = dataBinding.evaluateTemplate(binding);
 
     if (property == null) return;
 
-    const reactivity = dataBinding.evaluateReactive(property);
-    setValue(reactivity.value);
-    reactivity.subscribe((value) => {
+    const evaluationReactivity = dataBinding.evaluateReactive(property);
+    setReactivity(evaluationReactivity);
+    setValue(evaluationReactivity.value);
+    evaluationReactivity.subscribe((value) => {
       setValue(value);
     });
-  }, [dataBinding, binding]);
+  }, [dataBinding, binding, stateValue]);
 
-  return state;
+  const setStateValue = useCallback(
+    (arg: SetStateAction<T | null>) => {
+      setValue(arg);
+      if (reactivity) {
+        const newValue = typeof arg === "function" ? (arg as (v: T | null) => T | null)(stateValue) : arg;
+        console.log('[useBind] setting value', newValue)
+        reactivity.updateValue(newValue);
+      }
+    },
+    [reactivity]
+  );
+
+  return [stateValue, setStateValue];
 };

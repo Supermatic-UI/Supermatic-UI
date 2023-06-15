@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { SupermaticUi } from "@supermatic-ui/react-core";
 import { Registrations, createRegistrations } from "@supermatic-ui/core";
 import schema from "./sandbox.json";
+import { SupermaticLabel, SupermaticInput } from "../src/index"
 
 const components = {
-  label: () => <div>Just hardcoded label</div>,
-  input: () => <div>Just hardcoded input</div>,
+  label: SupermaticLabel,
+  input: SupermaticInput,
 };
 
 const App = () => {
