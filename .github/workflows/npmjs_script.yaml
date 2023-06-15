@@ -35,5 +35,5 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Publish package
-        run: yarn npm publish --tolerate-republish --access public
+        run: npm publish --tolerate-republish --access public
         working-directory: ${{ inputs.dir }}
