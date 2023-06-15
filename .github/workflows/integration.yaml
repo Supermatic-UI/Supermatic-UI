@@ -20,18 +20,18 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-        working-directory: ${{ inputs.dir }}
+        working-directory: core
 
       - name: Build
         run: yarn build
-        working-directory: ${{ inputs.dir }}
+        working-directory: core
         
       - name: Authenticate with npm
         run: echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Publish package
         run: npm publish --tolerate-republish --access public
-        working-directory: ${{ inputs.dir }}
+        working-directory: core
 
   # react-core:
   #   name: Publish @supermatic-ui/react-core NPM package
