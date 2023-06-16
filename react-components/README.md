@@ -1,4 +1,4 @@
-## @supermatic-ui/vue-core
+## @supermatic-ui/react-components
 
 Supermatic UI is a project that aims to provide a simple way to create web frontend UIs using a server-driven UI approach and a low-code editor, enhancing the productivity of web developers.
 
@@ -10,7 +10,7 @@ The best use cases for this project are:
 
 Supermatic UI stems from the abstract idea of composing UIs from metadata. It is not a framework; rather, it offers a framework-agnostic approach to creating UIs.
 
-This package, `@supermatic-ui/vue-core`, is implementation of `@supermatic-ui/core` in Vue. Additionally, we have the [@supermatic-ui/vue-components](https://www.npmjs.com/package/@supermatic-ui/vue-components) package, which offers a simple HTML-based component library that you can restyle.
+This package, `@supermatic-ui/react-components`, offers a simple HTML-based component library that you can restyle.
 
 To provide the best experience, you can clone the components to your repository and override everything to suit your needs.
 
@@ -20,67 +20,42 @@ Full documentation available at [Supermatic-UI GitHub repository](https://github
 
 This tutorial is applicable to developers who want to implement Supermatic UI in a web framework that is not supported or in a vanilla JavaScript web application.
 
-1. Install the `@supermatic-ui/vue-core` package using your package manager.
+1. Install  `@supermatic-ui/react-core` and `@supermatic-ui/react-components` packages using your package manager.
 
-2. Register plugin in your app
-
-```ts
-// main.ts
-import { UseSupermaticUi } from '@supermatic-ui/vue-core'
-
-...
-
-app.use(UseSupermaticUi)
-```
-
-
-3. Use `SupermaticUi` component in your page
+2. Use `SupermaticUi` component in your page
 
 ```ts
 // App.tsx
-<script setup lang="ts">
+import React from "react";
+import { SupermaticUi } from "@supermatic-ui/react-core";
 
-// Implement your components
-import MyLabelComponent from "./MyLabelComponent.vue";
+// Import components
+import { SupermaticLabel } from "@supermatic-ui/react-components";
 
 // Define and import layout schema
-import schema from "./helloWorld.json.json";
+import schema from "./helloWorld.json";
 
 // Register your components
 import { createRegistrations } from "@supermatic-ui/core";
 const components = createRegistrations({
-  label: SupermaticLabel
-});
-</script>
+  label: MyLabelComponent,
+})
 
-<template>
-  <SupermaticUi :configuration="schema" :registrations="components"></SupermaticUi>
-</template>
+const App = () => {
+
+  return (
+    <>
+      <SupermaticUi configuration={schema} registrations={components}></SupermaticUi>
+    </>
+  );
+};
+
+export default App;
 
 ```
 
-4. Implement your components
 
-```ts
-// MyLabelComponent
-<script setup lang="ts">
-import type { DataBindingContainer, LabelMetadata } from "@supermatic-ui/core";
-import { setupTemplate } from "@supermatic-ui/vue-core";
-
-const props = defineProps<{ metadata: LabelMetadata; dataBinding: DataBindingContainer }>();
-
-// Create read-only reactive binding
-const label = setupTemplate(props.dataBinding, props.metadata.label.text);
-</script>
-
-<template>
-  <span>{{ label }}</span>
-</template>
-
-<style scoped></style>
-```
-
-5. Define view schema in json
+3. Define view schema in json
 
 ```json
 // helloWorld.json
