@@ -9,6 +9,10 @@ jobs:
   core:
     name: Publish @supermatic-ui/core NPM package
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -80,3 +84,23 @@ jobs:
       - name: Publish package for react-components
         run: npm publish --tolerate-republish
         working-directory: react-components
+      
+      - name: Install dependencies for vue-examples
+        run: yarn install --frozen-lockfile
+        working-directory: vue-examples
+
+      - name: Build for vue-examples
+        run: yarn build
+        working-directory: vue-examples
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload GitHub Pages vue-examples artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: vue-examples/dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2

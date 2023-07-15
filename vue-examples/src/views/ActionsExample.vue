@@ -39,7 +39,30 @@ const forceRerender = () => {
 </script>
 
 <template>
-  <h1>Actions</h1>
+  <div class="content">
+    <h1>Actions</h1>
+    <p>
+      This example shows the core functions of the Actions feature. In Supermatic UI, to provide a
+      complete experience with Server-Driven UI, we need to handle various interactions with the
+      user and manage many aspects that arise in real usage, such as data fetching, input
+      validation, event reactions, and more.
+    </p>
+
+    <p>
+      This feature is called Actions, and we can define actions for each event point. We can set a
+      single action or an action chain (an array of actions). Each specific action is registered
+      with its own type and can define its own arguments. An action can access the data context and
+      the current component.
+    </p>
+
+    <p>
+      In this case, we have created a button that will fetch a random cat fact from a public API.
+      Here's how it works: In the Button component, we set an action with the type "http" and
+      specify its arguments (url, method). The last argument is "onResponse," which is also an
+      action. We set it to another action with the type "set," which will update the data context
+      variable called "value" using a double curly braces template.
+    </p>
+  </div>
 
   <div class="example">
     <div class="layout">
@@ -48,12 +71,28 @@ const forceRerender = () => {
         :configuration="schema"
         :registrations="registrations"
         @init="onInit($event)"
-      ></SupermaticUi>
+      >
+      </SupermaticUi>
     </div>
     <div>
       <SourceEditor :model-value="source" @update:model-value="updateSchema($event)"></SourceEditor>
     </div>
   </div>
+
+  <div class="content">
+    <p>
+      Full documentation available at
+      <a target="_blank" href="https://github.com/Supermatic-UI/Supermatic-UI/tree/main/docs"
+        >Supermatic-UI GitHub repository</a
+      >.
+    </p>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+@media (max-width: 640px) {
+  .content {
+    padding: 0 2rem;
+  }
+}
+</style>

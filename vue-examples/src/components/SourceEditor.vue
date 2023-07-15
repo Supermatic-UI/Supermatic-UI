@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import loader from '@monaco-editor/loader'
 import { ref, onMounted } from 'vue'
-import pageMetadataSchema from '@/assets/pageMetadatSchema.json'
+import pageMetadataSchema from '../assets/pageMetadatSchema.json'
 
 const props = defineProps<{
   modelValue: string

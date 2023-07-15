@@ -18,23 +18,23 @@ layout:
   # for components you can use any of the following types:
   # - button, checkbox, input, label, container, etc..
   components:
-  - type: button
-    className: btn btn-primary
-    button:
-      text: Get random cat fact
-      # action is a function that will be executed on button click
-      # in this example we use http action to get data from the public Dog API
-      action:
-        type: http
-        method: GET
-        url: https://meowfacts.herokuapp.com/
-        # after data fetched we set the value of the label component
-        onResponse:
-          type: set
-          set:
-            value: 'Here''s a random cat fact: {{response.data[0]}}'
-  - type: label
-    className: form-label
-    label:
-      # In properties you can use templating syntax with {{ }} brackets
-      text: "{{value}}"
+    - type: button
+      className: btn btn-primary
+      button:
+        text: Get random cat fact
+        # action is a function that will be executed on button click
+        # in this example we use http action to get data from the public Dog API
+        action:
+          type: http
+          method: GET
+          url: https://meowfacts.herokuapp.com/
+          # after data fetched we set the value of the label component
+          onResponse:
+            type: set
+            set:
+              value: "Here's a random cat fact: {{response.data[0]}}"
+    - type: label
+      className: form-label
+      label:
+        # In properties you can use templating syntax with {{ }} brackets
+        text: '{{value}}'
