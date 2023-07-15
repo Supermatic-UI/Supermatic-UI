@@ -19,11 +19,21 @@ import { RouterLink, RouterView } from 'vue-router'
     </div>
   </header>
 
-  <RouterView />
+  <div class="view">
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
+#app {
+  width: 100%;
+  max-width: 1480px;
+  margin: 0 auto;
+  font-weight: normal;
+}
+
 header {
+  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,11 +75,15 @@ nav a:first-of-type {
   border: 0;
 }
 
+.view {
+  padding: 0 2rem;
+}
+
 @media (min-width: 1024px) {
   header {
-    display: flex;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
+    width: 100%;
   }
 
   .logo {
@@ -86,13 +100,37 @@ nav a:first-of-type {
   }
 }
 
+@media (max-width: 1024px) {
+  header {
+    place-items: border-left;
+    align-items: start;
+    flex-direction: column;
+  }
+  .wrapper {
+    min-width: 0;
+  }
+}
+
 @media (max-width: 640px) {
   header {
+    padding: 2rem;
     flex-direction: column;
+  }
+
+  .wrapper {
+    min-width: 0;
+  }
+
+  nav {
+    text-align: left;
   }
 
   #app {
     display: display;
+  }
+
+  .view {
+    padding: 0;
   }
 }
 </style>

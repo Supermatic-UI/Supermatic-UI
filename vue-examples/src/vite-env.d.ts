@@ -1,3 +1,3 @@
 declare module '*.yaml' {
-    export const plainText: string
+  export const plainText: string
 }
