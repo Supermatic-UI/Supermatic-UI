@@ -6,7 +6,7 @@ import { RouterLink, RouterView } from 'vue-router'
   <header>
     <img alt="Supermatic UI logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
     <img alt="Vue logo" class="logo" src="@/assets/vue-logo.svg" width="125" height="125" />
-
+    <meta name="description" content="Supermatic UI">
     <div class="wrapper">
       <h2>Here is Supermatic UI with Vue.js example</h2>
       <p>The way to build web UI with server driven approach and low-code editor</p>
